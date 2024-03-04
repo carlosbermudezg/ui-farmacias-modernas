@@ -1,0 +1,7 @@
+#662D91 color primario violeta
+#7A428D color primario violeta
+#F26524 color primario naranja
+#662D91 color primario naranja
+#F26524 color primario rojo
+#F57E25 color primario naranja
+#FFFFFF color blanco
