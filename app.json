@@ -1,5 +1,9 @@
 {
   "expo": {
+    "androidStatusBar": {
+      "backgroundColor": "#F57E24",
+      "translucent": false
+    },
     "name": "ui-system",
     "slug": "ui-system",
     "version": "1.0.0",
@@ -24,7 +28,12 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

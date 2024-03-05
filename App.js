@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Login from './src/views/Login';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Bienvenidos a la app de Farmacias Lopez Modernas!</Text>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
+      <Login></Login>
     </View>
   );
 }
@@ -14,7 +15,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor:'#F26525'
+  }
 });
