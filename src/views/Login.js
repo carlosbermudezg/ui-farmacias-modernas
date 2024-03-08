@@ -1,30 +1,31 @@
 import { View, Text, Image, TextInput, Pressable, ScrollView } from "react-native"
+import Button from "../components/Button"
 import loginStyle from "../../assets/styles/login"
-const Logo = require('../../public/farmacias-modernas.png')
+const LogoFarmaciasModernas = require('../../public/farmacias-modernas.jpeg')
+const LogoFarmaciasLopez =  require('../../public/farmacias-lopez.jpg')
 
 const Login = ()=>{
     return(
         <>
-        <View style={loginStyle.container}>
+        <View style={loginStyle.mainContainer}>
             <Image
                 style={ loginStyle.logo }
-                source={Logo}
+                source={ LogoFarmaciasLopez } 
             />
         </View>
         <View style={ loginStyle.loginWrap }>
             <ScrollView contentContainerStyle={ loginStyle.loginContainer }>
-                <Text style={loginStyle.title}>Ingresa tu usuario y contraseña para acceder.</Text>
                 <View style={ loginStyle.loginForm }>
-                <Text>Usuario</Text>
+                    <Image
+                        style={ loginStyle.logo1 }
+                        source={ LogoFarmaciasModernas }  
+                    />
                     <TextInput style= { loginStyle.loginInput } placeholder="Ingresa tu usuario"></TextInput>
-                    <Text>Contraseña</Text>
                     <TextInput secureTextEntry={true} style= { loginStyle.loginInput } placeholder="Ingresa tu contraseña"></TextInput>
-                    <Pressable style={ loginStyle.login }><Text style={ loginStyle.loginText }>Entrar</Text></Pressable>
+                    <Button buttonText="Entrar"></Button>
                 </View>
                 <Text style={loginStyle.title}>¿No tienes cuenta?</Text>
-                <Pressable style={ loginStyle.login }>
-                    <Text style={ loginStyle.loginText }>Registrate</Text>
-                </Pressable>
+                <Button buttonText="Registrarse"></Button>
             </ScrollView>
         </View>
         </>

@@ -1,33 +1,40 @@
 import { StyleSheet } from "react-native";
 
 const loginStyle = StyleSheet.create({
-    container:{
+    mainContainer:{
         flex:1,
-        backgroundColor: '#f69a23',
+        backgroundColor: '#112f8f',
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         maxHeight: 100,
     },
     logo:{
-        marginTop:20,
-        width:200,
-        height:50
+        marginTop:30,
+        width:300,
+        height:60 
+    },
+    logo1:{
+        marginTop:30,
+        width:300,
+        height:70
     },
     loginWrap: {
         flex: 1,
         backgroundColor: '#FFF',
         justifyContent: 'center',
         alignItems:'center',
+        borderTopStartRadius: 30,
+        borderTopRightRadius: 30
     },
     loginContainer: {
         flex:1,
         justifyContent:'center',
         alignItems:'center',
-        gap: 30,
-        backgroundColor:'#FFFFFF'
+        gap: 20,
+        backgroundColor:'#FFF'
     },
     loginForm: {
-        gap:5
+        gap:10
     },
     title:{
         fontWeight: 'bold',
@@ -38,7 +45,7 @@ const loginStyle = StyleSheet.create({
         alignItems:'center',
         paddingVertical: 12,
         paddingHorizontal: 32,
-        borderRadius: 4,
+        borderRadius: 30,
         backgroundColor: '#662D91',
         marginTop: 10,
         width: 300
@@ -48,7 +55,7 @@ const loginStyle = StyleSheet.create({
     },
     loginInput: {
         padding: 10,
-        borderRadius: 4,
+        borderRadius: 30,
         borderWidth: 1,
         borderColor:'#662D91',
         width: 300
