@@ -26,6 +26,10 @@ const loginStyle = StyleSheet.create({
         borderTopStartRadius: 30,
         borderTopRightRadius: 30
     },
+    table: {
+        width:'80%',
+        alignSelf: 'center'
+    },
     loginContainer: {
         flex:1,
         justifyContent:'center',
@@ -41,14 +45,9 @@ const loginStyle = StyleSheet.create({
         fontSize: 16
     },
     login: {
-        justifyContent:'center',
-        alignItems:'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 30,
+        borderRadius: 5,
         backgroundColor: '#662D91',
-        marginTop: 10,
-        width: 300
+        marginTop: 10
     },
     loginText: {
         color:'white'
@@ -59,6 +58,10 @@ const loginStyle = StyleSheet.create({
         borderWidth: 1,
         borderColor:'#662D91',
         width: 300
+    },
+    appbar: {
+        height:60,
+        backgroundColor:'#112f8f'
     }
 })
 
