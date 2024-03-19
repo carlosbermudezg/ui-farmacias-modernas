@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
+import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 
 import Login from './src/views/Login';
 import Main from './src/views/Main'

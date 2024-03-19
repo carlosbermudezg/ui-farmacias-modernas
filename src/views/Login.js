@@ -1,29 +1,32 @@
-import { useState, useEffect } from 'react';
-import { TextInput, Button, Snackbar } from 'react-native-paper';
-import axios from 'axios';
+import { useState, useEffect } from 'react'
+import { TextInput, Button, Snackbar } from 'react-native-paper'
+import axios from 'axios'
 import { View, Text, Image, ScrollView } from "react-native"
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import loginStyle from "../../assets/styles/login"
 const LogoFarmaciasModernas = require('../../public/farmacias-modernas.jpeg')
 const LogoFarmaciasLopez =  require('../../public/farmacias-lopez.jpg')
 
 const Login = ({navigation})=>{
 
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
-    const [loadingLogin, setLoadingLogin] = useState(false);
-    const [snackbarVisible, setSnackbarVisible] = useState(false);
-    const [snackbarMsg, setSnackbarMsg] = useState('');
+    const [user, setUser] = useState('')
+    const [password, setPassword] = useState('')
+    const [loadingLogin, setLoadingLogin] = useState(false)
+    const [snackbarVisible, setSnackbarVisible] = useState(false)
+    const [snackbarMsg, setSnackbarMsg] = useState('')
 
-    const onDismissSnackBar = () => setSnackbarVisible(false);
+    const onDismissSnackBar = () => setSnackbarVisible(false)
 
-    const userLogged = AsyncStorage.getItem('user');
-    const token = AsyncStorage.getItem('token')
+    const VerifyLogin = async() =>{
+        const userLogged = await AsyncStorage.getItem('user')
+        const token = await AsyncStorage.getItem('token')
+        if (userLogged && token) {
+            navigation.navigate('Main')
+          }
+    }
 
     useEffect(() => {
-        if (userLogged && token) {
-          navigation.navigate('Main')
-        }
+        VerifyLogin()
     }, [])
 
     const handleLogin = () =>{
@@ -46,8 +49,8 @@ const Login = ({navigation})=>{
                     setLoadingLogin(false)
                 },2000)
             })
-            .catch( error => {
-                setSnackbarMsg('El usuario o contraseña son incorrectos.')
+            .catch( (error) => {
+                setSnackbarMsg(error.response.data.error)
                 setSnackbarVisible(true)
             } )
     }

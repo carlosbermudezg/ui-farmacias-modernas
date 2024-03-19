@@ -1,11 +1,10 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const loginStyle = StyleSheet.create({
     mainContainer:{
         flex:1,
         backgroundColor: '#112f8f',
         alignItems: 'center',
-        // justifyContent: 'center',
         maxHeight: 100,
     },
     logo:{
@@ -27,8 +26,14 @@ const loginStyle = StyleSheet.create({
         borderTopRightRadius: 30
     },
     table: {
-        width:'80%',
-        alignSelf: 'center'
+        marginTop: 10,
+        width:'100%',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent:'center',
+        gap:10,
+        flexDirection:'row',
+        flexWrap:'wrap',
     },
     loginContainer: {
         flex:1,
@@ -61,7 +66,114 @@ const loginStyle = StyleSheet.create({
     },
     appbar: {
         height:60,
-        backgroundColor:'#112f8f'
+        color: '#fff',
+        backgroundColor:'#662D91',
+    },
+    drawer: {
+        width:250,
+        height: Dimensions.get('window').height,
+        backgroundColor:'#fff',
+        position:'fixed'
+    },
+    logout: {
+        flex: 1,
+        backgroundColor:'#fff',
+        justifyContent:'center',
+        alignItems:'center',
+        gap: 10
+    },
+    contentForm: {
+        height: Dimensions.get('window').height,
+        backgroundColor:'#fff'
+    },
+    registerForm: {
+        width: 280,
+        justifyContent:'center',
+        alignItems:'center',
+        gap: 10
+    },
+    registerText: {
+        color: '#662D91'
+    },
+    registerInput: {
+        width:'100%',
+        borderBottomWidth:0
+    },
+    dialogRegister: {
+        width: 280,
+        alignSelf: 'center'
+    },
+    productCard: {
+        width: 300,
+        borderRadius: 10,
+        backgroundColor:'#F57E25',
+    },
+    categories: {
+        flexDirection:'row',
+        flexWrap:'wrap',
+        justifyContent:'center',
+        marginTop: 10
+    },
+    homeWrap: {
+        flex: 1,
+        backgroundColor: '#FFF',
+        justifyContent: 'center',
+        alignItems:'center',
+    },
+    homeContent: {
+        flex:1,
+    },
+    buttonCategory: {
+        width: 80,
+        borderRadius: 0
+    },
+    buttonCategoryFirst: {
+        borderTopLeftRadius: 20
+    },
+    buttonCategoryLast: {
+        borderBottomEndRadius: 20
+    },
+    buttonCategoryDivider: {
+        borderColor:'#7A428D',
+        borderRightWidth: 1
+    },
+    registerWrap: {
+        backgroundColor: '#FFF',
+        justifyContent: 'center',
+        alignItems:'center',
+    },
+    chat: {
+        width:'100%',
+        flex:1,
+        flexDirection:'row'
+    },
+    chatContacts: {
+        backgroundColor: 'silver',
+        width: '20%',
+        height: Dimensions.get('window').height,
+    },
+    chatContent: {
+        backgroundColor:'green',
+        width: '80%',
+        height: Dimensions.get('window').height,
+    },
+    chatSending: {
+        flexDirection:'row'
+    },
+    chatInput: {
+        borderWidth: 1,
+        backgroundColor:'#fff',
+        borderColor:'#662D91',
+        width:'85%',
+        padding: 10
+    },
+    chatButton: {
+        width:'15%',
+        borderRadius:0
+    },
+    chatReading: {
+        height: '80%',
+        backgroundColor:'yellow'
     }
 })
 
