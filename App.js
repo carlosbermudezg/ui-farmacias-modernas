@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 
+import { Provider } from 'react-redux'
+import store from './src/store'
+
 import Login from './src/views/Login';
 import Main from './src/views/Main'
 import Register from './src/views/Register';
@@ -19,22 +22,24 @@ const navigationTheme = {
 
 export default function App() {
   return (
-    <PaperProvider>
-      <View style={styles.container}>
-        <StatusBar style="light"/>
-        <NavigationContainer theme={navigationTheme}>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="Login" component={Login}/>
-            <Stack.Screen name="Register" component={Register}/>
-            <Stack.Screen name="Main" component={Main} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
-    </PaperProvider>
+    <Provider store={ store }>
+      <PaperProvider>
+        <View style={styles.container}>
+          <StatusBar style="light"/>
+          <NavigationContainer theme={navigationTheme}>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="Login" component={Login}/>
+              <Stack.Screen name="Register" component={Register}/>
+              <Stack.Screen name="Main" component={Main} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
+      </PaperProvider>
+    </Provider>
   );
 }
 
