@@ -3,7 +3,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Avatar, Card, IconButton, Button, Searchbar, DataTable, Icon, Text } from 'react-native-paper'
 import { View, ScrollView, RefreshControl } from "react-native"
-import loginStyle from "../../assets/styles/login"
+import homeStyle from "../../assets/styles/home"
 
 const Home = ()=>{
 
@@ -64,11 +64,6 @@ const Home = ()=>{
         }
     ])
     const [searchQuery, setSearchQuery] = useState('');
-    const [numberOfItemsPerPageList] = useState([2, 3, 4]);
-    const [itemsPerPage, onItemsPerPageChange] = useState(
-      numberOfItemsPerPageList[0]
-    );
-
 
     const onRefresh = useCallback(() => {
         setIsLoading(true);
@@ -191,14 +186,14 @@ const Home = ()=>{
 
     return(
         <>
-        <View style={ loginStyle.homeWrap }>
-            <View style={ loginStyle.homeContent }>
-                <View style={ loginStyle.filterContainer }>
-                    <View style={ loginStyle.categories }>
+        <View style={ homeStyle.homeWrap }>
+            <View style={ homeStyle.homeContent }>
+                <View style={ homeStyle.filterContainer }>
+                    <View style={ homeStyle.categories }>
                         <Button 
                             buttonColor='#f69a23'
                             icon="arm-flex-outline"
-                            style={ [loginStyle.buttonCategory] } 
+                            style={ [homeStyle.buttonCategory] } 
                             mode="contained" 
                             onPress={() => {
                                 setSearchValue('Buscar en categoria del 3%')
@@ -210,7 +205,7 @@ const Home = ()=>{
                         <Button 
                             buttonColor='#F57E25'
                             icon="check-decagram-outline"
-                            style={ [loginStyle.buttonCategory] } 
+                            style={ [homeStyle.buttonCategory] } 
                             mode="contained" 
                             onPress={() => {
                                 setSearchValue('Buscar en categoria del 5%')
@@ -222,7 +217,7 @@ const Home = ()=>{
                         <Button 
                             buttonColor='#F26524'
                             icon="shield-star-outline"
-                            style={ [loginStyle.buttonCategory] } 
+                            style={ [homeStyle.buttonCategory] } 
                             mode="contained" 
                             onPress={() => {
                                 setSearchValue('Buscar en categoria del 15%')
@@ -234,7 +229,7 @@ const Home = ()=>{
                         <Button 
                             buttonColor='#662D91'
                             icon="all-inclusive"
-                            style={ [loginStyle.buttonCategory] } 
+                            style={ [homeStyle.buttonCategory] } 
                             mode="contained" 
                             onPress={() => {
                                 setSearchValue('Buscar todos los productos')
@@ -245,7 +240,7 @@ const Home = ()=>{
                         </Button>
                     </View>
                     <Searchbar
-                        style={ loginStyle.searchInput }
+                        style={ homeStyle.searchInput }
                         placeholder={ searchValue }
                         onChangeText={(value)=>{
                             filterProducts(value)
@@ -253,7 +248,7 @@ const Home = ()=>{
                         value={searchQuery}
                     />
                 </View>
-                <ScrollView contentContainerStyle={ loginStyle.table }
+                <ScrollView contentContainerStyle={ homeStyle.table }
                     refreshControl={
                         <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
                       }
@@ -288,7 +283,7 @@ const Home = ()=>{
                                                     { porcentaje }
                                                 </Button>
                                             </DataTable.Cell>
-                                            <DataTable.Cell style={ loginStyle.producto }>{ product.PRODUCTO }</DataTable.Cell>
+                                            <DataTable.Cell style={ homeStyle.producto }>{ product.PRODUCTO }</DataTable.Cell>
                                             <DataTable.Cell numeric>{ product.CANTIDAD }</DataTable.Cell>
                                             </DataTable.Row>
                                         )
@@ -298,7 +293,7 @@ const Home = ()=>{
                         renderProducts.map((product, index)=>{
                             const category = categories.find((element) => element.id == product.CATEGORIA);
                                 return(
-                                    <Card.Title style={ loginStyle.productCard } key={ index }
+                                    <Card.Title style={ homeStyle.productCard } key={ index }
                                         title={ product.PRODUCTO }
                                         subtitle={`Cantidad en Stock: ${product.CANTIDAD}`}
                                         left={(props) => <Avatar.Icon key={ index} {...props} icon="folder" />}
@@ -308,10 +303,10 @@ const Home = ()=>{
                         })
                     }
                 </ScrollView>
-                <View style={ loginStyle.pagination }>
+                <View style={ homeStyle.pagination }>
                     <Button 
                         disabled={ page === 1 }
-                        style={ loginStyle.paginationButtons }
+                        style={ homeStyle.paginationButtons }
                         mode="outlined" 
                         onPress={() => {
                             setPage(1)
@@ -323,7 +318,7 @@ const Home = ()=>{
                         />
                     </Button>
                     <Button 
-                        style={ loginStyle.paginationButtons }
+                        style={ homeStyle.paginationButtons }
                         mode="outlined" 
                         onPress={() => prev()}>
                         <Icon
@@ -333,7 +328,7 @@ const Home = ()=>{
                     </Button>
                     <Text variant="titleMedium">Pagina: { page } de { totalPages }</Text>
                     <Button 
-                        style={ loginStyle.paginationButtons }
+                        style={ homeStyle.paginationButtons }
                         mode="outlined" 
                         onPress={() => next()}>
                         <Icon
@@ -342,7 +337,7 @@ const Home = ()=>{
                         />
                     </Button>
                     <Button 
-                        style={ loginStyle.paginationButtons }
+                        style={ homeStyle.paginationButtons }
                         mode="outlined" 
                         disabled={ page === totalPages }
                         onPress={() => {
