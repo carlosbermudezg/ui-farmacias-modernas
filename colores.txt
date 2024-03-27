@@ -5,3 +5,4 @@
 #F26524 color primario rojo
 #F57E25 color primario naranja
 #FFFFFF color blanco
+#8639C0 color morado bajo

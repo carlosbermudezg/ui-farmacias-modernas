@@ -1,19 +1,15 @@
-import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ScrollView } from 'react-native';
+import { useState, useEffect, Suspense, Text } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer'
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator()
 
-import Home from './Home';
-import Permisos from './Permisos';
+import Home from './Home'
 import Users from './Users'
-import LoginOut from './LogingOut';
-import Chat from './Chat';
-import Recetas from './Recetas';
-
-import loginStyle from '../../assets/styles/login';
+import LoginOut from './LogingOut'
+import Chat from './Chat'
+import Recetas from './Recetas'
 
 const Main = ()=>{
 
@@ -31,6 +27,7 @@ const Main = ()=>{
     return (
         <Drawer.Navigator
             screenOptions={{
+                headerShown: false,
                 headerTintColor:'#fff',
                 headerStyle: {
                     backgroundColor:'#662D91'
@@ -42,7 +39,7 @@ const Main = ()=>{
             }
             }
         >
-            <Drawer.Screen options={ { gestureEnabled: true,swipeEnabled: false,} } name="Productos" component={ Home } />
+            <Drawer.Screen options={ { gestureEnabled: true,swipeEnabled: false} } name="Productos" component={ Home } />
             <Drawer.Screen name="Chat" component={ Chat } />
             {
                 user.type === 1 ? <Drawer.Screen name="Recetas" component={ Recetas } /> : false
