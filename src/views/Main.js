@@ -1,7 +1,9 @@
-import { useState, useEffect, Suspense, Text } from 'react'
+import { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import { View } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import DrawerContent from '../components/DrawerContent'
+import { Icon } from 'react-native-paper'
 
 const Drawer = createDrawerNavigator()
 
@@ -33,21 +35,78 @@ const Main = ()=>{
                     backgroundColor:'#662D91'
                 },
                 drawerStyle: {
-                    backgroundColor: '#FFF',
+                    margin: 20,
+                    marginLeft: 0,
+                    backgroundColor: 'transparent',
                     width: 250,
+                    borderTopRightRadius:5
                 },
             }
             }
+            drawerContent={(props) => <DrawerContent {...props}></DrawerContent> }
         >
-            <Drawer.Screen options={ { gestureEnabled: true,swipeEnabled: false} } name="Productos" component={ Home } />
-            <Drawer.Screen name="Chat" component={ Chat } />
+            <Drawer.Screen options={ 
+                    { 
+                        drawerIcon: ()=>{
+                            return(
+                                <Icon
+                                    source="apps-box"
+                                    color={'#F57E25'}
+                                    size={20}
+                                />
+                            )
+                        }
+                    } 
+                } 
+                name="Productos" component={ Home } 
+            />
+            <Drawer.Screen 
+                options={ 
+                    { 
+                        drawerIcon: ()=>{
+                            return(
+                                <Icon
+                                    source="email-check-outline"
+                                    color={'#F57E25'}
+                                    size={20}
+                                />
+                            )
+                        }
+                    } 
+                }  
+                name="Buzón" component={ Chat } 
+            />
             {
-                user.type === 1 ? <Drawer.Screen name="Recetas" component={ Recetas } /> : false
+                user.type === 1 ? <Drawer.Screen options={ 
+                    { 
+                        drawerIcon: ()=>{
+                            return(
+                                <Icon
+                                    source="account"
+                                    color={'#F57E25'}
+                                    size={20}
+                                />
+                            )
+                        }
+                    } 
+                }  name="Recetas" component={ Recetas } /> : false
             }
             {
-                user.type === 10 ? <Drawer.Screen name="Usuarios" component={ Users } /> : false
+                user.type === 10 ? <Drawer.Screen options={ 
+                    { 
+                        drawerIcon: ()=>{
+                            return(
+                                <Icon
+                                    source="account"
+                                    color={'#F57E25'}
+                                    size={20}
+                                />
+                            )
+                        }
+                    } 
+                }  name="Usuarios" component={ Users } /> : false
             }
-            <Drawer.Screen options={ {headerShown: false} } name="Salir" component={ LoginOut } />
+            <Drawer.Screen options={ {headerShown: false, drawerItemStyle:{ display: 'none' }} } name="Salir" component={ LoginOut } />
         </Drawer.Navigator>
     )
 }

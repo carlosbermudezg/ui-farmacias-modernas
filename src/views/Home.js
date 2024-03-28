@@ -18,8 +18,8 @@ const Home = ({ navigation })=>{
     const fetcher = (url)=> axios.get(url).then( res => res.data )
     const { data, error, isLoading } = useSWR(`${process.env.EXPO_PUBLIC_APISHEYLA_URL}/products/`, fetcher,{ suspense: true })
     dispatch(setProducts(data?.data))
-    dispatch(setRenderProducts(data?.data.slice(0,20)))
-    dispatch(setTotalPage(Math.ceil(data?.data.length / 20)))
+    dispatch(setRenderProducts(data?.data.slice(0,5)))
+    dispatch(setTotalPage(Math.ceil(data?.data.length / 5)))
 
     // useEffect(() => {
     //     const getSearchProduct = async()=>{

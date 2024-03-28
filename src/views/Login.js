@@ -6,10 +6,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import loginStyle from "../../assets/styles/login"
 const LogoFarmaciasModernas = require('../../public/farmacias-modernas.jpeg')
 const LogoFarmaciasLopez =  require('../../public/farmacias-lopez.jpg')
+import { useDispatch } from 'react-redux'
+import { setUser } from '../store/slices/user.slice'
 
 const Login = ({navigation})=>{
 
-    const [user, setUser] = useState('')
+    const dispatch = useDispatch()
+
+    const [user, setUserLogin] = useState('')
     const [password, setPassword] = useState('')
     const [loadingLogin, setLoadingLogin] = useState(false)
     const [snackbarVisible, setSnackbarVisible] = useState(false)
@@ -43,6 +47,7 @@ const Login = ({navigation})=>{
             .then( (response) =>{
                 setLoadingLogin(true)
                 setTimeout(()=>{
+                    dispatch(setUser(response.data.user))
                     AsyncStorage.setItem('user', JSON.stringify(response.data.user))
                     AsyncStorage.setItem('token', response.data.token)
                     navigation.navigate('Main')
@@ -74,7 +79,7 @@ const Login = ({navigation})=>{
                         mode="outlined"
                         label="Usuario"
                         placeholder="Escribe tu usuario"
-                        onChange={ (e) => setUser(e.nativeEvent.text)}
+                        onChange={ (e) => setUserLogin(e.nativeEvent.text)}
                     />
                     <TextInput
                         mode="outlined"

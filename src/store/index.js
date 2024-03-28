@@ -6,6 +6,7 @@ import renderProductsSlice from './slices/renderProducts.slice'
 import totalPageSlice from './slices/totalPage'
 import categoryUserSlice from './slices/categoryUser.slice'
 import searchQuerySlice from './slices/searchQuery.slice'
+import userSlice from './slices/user.slice'
 
 export default configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
         renderProducts: renderProductsSlice,
         totalPage: totalPageSlice,
         categoryUser: categoryUserSlice,
-        searchQuery: searchQuerySlice
+        searchQuery: searchQuerySlice,
+        user: userSlice
 	}
 })
