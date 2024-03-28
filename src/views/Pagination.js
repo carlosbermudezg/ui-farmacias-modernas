@@ -1,4 +1,5 @@
 import homeStyle from "../../assets/styles/home"
+import paginationStyle from "../../assets/styles/pagination"
 import { View } from "react-native"
 import { Icon, Text, Button } from "react-native-paper"
 import { setPage } from "../store/slices/page.slice"
@@ -6,10 +7,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { setRenderProducts } from "../store/slices/renderProducts.slice"
 import { setTotalPage } from "../store/slices/totalPage"
+import { Platform } from "react-native"
 
 const Pagination = ()=>{
 
     const [limit] = useState(5)
+    let styles = {}
+
+    if(Platform.OS === 'web'){
+        styles = homeStyle
+    }else{
+        styles = paginationStyle
+    }
 
     const products = useSelector(state => state.products)
     const category = useSelector(state => state.category)
@@ -57,56 +66,90 @@ const Pagination = ()=>{
 
 
     return(
-        <View style={ homeStyle.pagination }>
-            <Button 
-                disabled={ page === 1 }
-                style={ homeStyle.paginationButtons }
-                mode="outlined" 
-                onPress={() => {
-                    dispatch(setPage(1))
-                }}>
-                <Icon
-                    source="chevron-double-left"
-                    size={20}
-                />
-            </Button>
-            <Button 
-                disabled={ page === 1 }
-                style={ homeStyle.paginationButtons }
-                mode="outlined" 
-                onPress={() => {
-                    dispatch(setPage(page - 1))
-                }}>
-                <Icon
-                    source="arrow-left"
-                    size={20}
-                />
-            </Button>
-            <Text variant="titleMedium">Pagina: { page } de { totalPages }</Text>
-            <Button 
-                disabled={ page === totalPages }
-                style={ homeStyle.paginationButtons }
-                mode="outlined" 
-                onPress={() => {
-                    dispatch(setPage(page + 1))
-                }}>
-                <Icon
-                    source="arrow-right"
-                    size={20}
-                />
-            </Button>
-            <Button 
-                style={ homeStyle.paginationButtons }
-                mode="outlined" 
-                disabled={ page === totalPages }
-                onPress={() => {
-                    dispatch(setPage(totalPages))
-                }}>
-                <Icon
-                    source="chevron-double-right"
-                    size={20}
-                />
-            </Button>
+        <View style={ styles.pagination }>
+            {
+                Platform.OS === 'web' ?
+                <>
+                    <Button 
+                        disabled={ page === 1 }
+                        style={ styles.paginationButtons }
+                        mode="outlined" 
+                        onPress={() => {
+                            dispatch(setPage(1))
+                        }}>
+                        <Icon
+                            source="chevron-double-left"
+                            size={20}
+                        />
+                    </Button>
+                    <Button 
+                        disabled={ page === 1 }
+                        style={ styles.paginationButtons }
+                        mode="outlined" 
+                        onPress={() => {
+                            dispatch(setPage(page - 1))
+                        }}>
+                        <Icon
+                            source="arrow-left"
+                            size={20}
+                        />
+                    </Button>
+                    <Text variant="titleMedium">Pagina: { page } de { totalPages }</Text>
+                    <Button 
+                        disabled={ page === totalPages }
+                        style={ styles.paginationButtons }
+                        mode="outlined" 
+                        onPress={() => {
+                            dispatch(setPage(page + 1))
+                        }}>
+                        <Icon
+                            source="arrow-right"
+                            size={20}
+                        />
+                    </Button>
+                    <Button 
+                        style={ styles.paginationButtons }
+                        mode="outlined" 
+                        disabled={ page === totalPages }
+                        onPress={() => {
+                            dispatch(setPage(totalPages))
+                        }}>
+                        <Icon
+                            source="chevron-double-right"
+                            size={20}
+                        />
+                    </Button>
+                </>:
+                <>
+                    <Button 
+                        disabled={ page === 1 }
+                        style={ styles.paginationButtons }
+                        mode="outlined" 
+                        onPress={() => {
+                            dispatch(setPage(page - 1))
+                        }}>
+                        <Icon
+                            source="arrow-left"
+                            color="#662D91"
+                            size={20}
+                        />
+                    </Button>
+                    <Text variant="bodySmall">Pagina : { page } de { totalPages }</Text>
+                    <Button 
+                        disabled={ page === totalPages }
+                        style={ styles.paginationButtons }
+                        mode="outlined"
+                        onPress={() => {
+                            dispatch(setPage(page + 1))
+                        }}>
+                        <Icon
+                            source="arrow-right"
+                            color="#662D91"
+                            size={20}
+                        />
+                    </Button>
+                </>
+            }
         </View>
     )
 }

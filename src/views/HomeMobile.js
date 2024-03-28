@@ -8,7 +8,7 @@ import Pagination from "./Pagination"
 const HomeMobile = ()=>{
 
     return(
-        <View style={ homeStyle.homeContent }>
+        <View style={ homeStyle.homeContentMobile }>
             <View style={ homeStyle.filterContainerMobile }>
                 <View style={ homeStyle.categoriesMobile }>
                     <View style={ homeStyle.iconContainer }>

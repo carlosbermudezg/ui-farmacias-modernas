@@ -2,12 +2,17 @@ import { useState } from "react"
 import { Platform, TextInput } from "react-native"
 import { Appbar, Icon } from "react-native-paper"
 import homeStyle from "../../assets/styles/home"
+import { useDispatch, useSelector } from "react-redux"
+import { setSearchQuery } from "../store/slices/searchQuery.slice"
+import { setPage } from "../store/slices/page.slice"
 
 const Navbar = ({ navigation })=>{
 
+    const dispatch = useDispatch()
+    const searchQuery = useSelector( state => state.searchQuery )
+
     const [searchBarIsVisible, setSearchBarIsVisible] = useState(false)
     const [searchValue, setSearchValue] = useState('Buscar todos los productos')
-    const [searchQuery, setSearchQuery] = useState('');
 
     return(
         <Appbar.Header style={ homeStyle.appbar }>
@@ -34,7 +39,8 @@ const Navbar = ({ navigation })=>{
                             style={ homeStyle.searchInputMobile } 
                             placeholder={ searchValue }
                             onChangeText={(value)=>{
-                                filterProducts(value)
+                                dispatch( setPage( 1 ) )
+                                dispatch(setSearchQuery(value))
                             }} 
                             value={searchQuery}
                         />

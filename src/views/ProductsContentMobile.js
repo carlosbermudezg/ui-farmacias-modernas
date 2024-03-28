@@ -19,11 +19,12 @@ const ProductsContentMobile = ()=>{
     return(
         <SafeAreaView style={ homeStyle.productsContainerMobile }>
             <FlatList
+                contentContainerStyle={ homeStyle.flatProducts }
                 refreshControl={
                     <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
                 }
                 data={renderProducts}
-                renderItem={({item}) => <CardProduct id={item.CODIGO} product={item?.PRODUCTO} stock={item?.CANTIDAD} />}
+                renderItem={({item}) => <CardProduct id={item.CODIGO} product={item?.PRODUCTO} stock={item?.CANTIDAD} category={ item?.CATEGORIA } />}
                 keyExtractor={key => key.CODIGO}
             />
         </SafeAreaView>

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const homeStyle = StyleSheet.create({
     //WEB STYLES
@@ -112,11 +112,6 @@ const homeStyle = StyleSheet.create({
     producto: {
         flex:3
     },
-    productCard: {
-        width: 300,
-        borderRadius: 10,
-        backgroundColor:'#F57E25',
-    },
     pagination: {
         backgroundColor:'#FFF',
         height: 60,
@@ -140,7 +135,50 @@ const homeStyle = StyleSheet.create({
     },
     //MOBILE STYLES
     productsContainerMobile:{
-        height: 400
+        width:'100%',
+        height: '72%',
+        backgroundColor:'#FFF',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    productCard: {
+        width: '95%',
+        height: 80,
+        borderRadius: 5,
+        backgroundColor:'#FFF',
+        marginTop:2.5,
+        marginBottom: 2.5,
+        marginLeft:5,
+        marginRight: 5,
+        flexDirection:'row',
+        padding:10,
+        gap:5,
+        elevation:5,
+        alignItems:'center'
+    },
+    productCardIcon:{
+        justifyContent:'center',
+        alignItems:'center',
+        width:'10%',
+        maxHeight:50,
+        borderRadius: 100,
+        padding:5
+    },
+    productCardInfo:{
+        width:'90%'
+    },
+    filterContainerMobile:{
+        height:'18%',
+        backgroundColor:'#FFF'
+    },
+    homeContentMobile:{
+        flex: 1,
+        backgroundColor: '#FFF',
+    },
+    flatProducts:{
+        alignItems:'center',
+        backgroundColor:'#FFF',
+        width:'100%',
     }
 })
 
