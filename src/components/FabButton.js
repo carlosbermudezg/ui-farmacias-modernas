@@ -7,7 +7,7 @@ import categories from "../utils/Categories"
 import { useState } from "react"
 import { setPage } from "../store/slices/page.slice"
 
-const FabButton = ({category, icon, color, rippleColor})=>{
+const FabButton = ({category, icon, color, rippleColor, label})=>{
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -34,13 +34,16 @@ const FabButton = ({category, icon, color, rippleColor})=>{
         },2000)
     }
 
+    const bg = rippleColor
+
     return(
         <FAB
             loading={ isLoading }
             icon={icon}
-            color={color}
+            customSize={40}
+            color='#FFF'
             rippleColor={rippleColor}
-            style={ [homeStyle.buttonCategoryMobile, { backgroundColor:'#FFF', borderColor:'#f69a23' }]} 
+            style={ { shadowRadius:0, backgroundColor: rippleColor, borderColor:'#f69a23', width:'100%', justifyContent:'center', alignItems:'center' }} 
             onPress={() => {
                 resetCategory(category)
             }}

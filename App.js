@@ -1,6 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, View } from 'react-native'
+import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper'
 
 import { Provider } from 'react-redux'
 import store from './src/store'
@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 
 const navigationTheme = {
   colors: {
-    background: '#112f8f',
+    background: 'transparent',
   },
 };
 
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
 },
   container: {
     flex: 1,
-    backgroundColor:'#112f8f'
+    backgroundColor:'transparent',
   }
 });

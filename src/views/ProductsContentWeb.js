@@ -22,6 +22,7 @@ const ProductsContentWeb = ()=>{
                             renderProducts?.map((product, index)=>{
                                 const category = categories.find((element) => element.id == product.CATEGORIA);
                                 const porcentaje = category === undefined ? '0%' : `${ category.value }%`
+                                const stock = Number(product.CANTIDAD) + Number(product.b1) + Number(product.b2)
                                 return(
                                     <DataTable.Row key={index}>
                                     <DataTable.Cell>
@@ -33,7 +34,7 @@ const ProductsContentWeb = ()=>{
                                         </Button>
                                     </DataTable.Cell>
                                     <DataTable.Cell style={ homeStyle.producto }>{ product.PRODUCTO }</DataTable.Cell>
-                                    <DataTable.Cell numeric>{ product.CANTIDAD }</DataTable.Cell>
+                                    <DataTable.Cell numeric>{ stock }</DataTable.Cell>
                                     </DataTable.Row>
                                 )
                             })

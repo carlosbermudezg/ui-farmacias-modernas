@@ -29,49 +29,81 @@ const homeStyle = StyleSheet.create({
         flexWrap: 'wrap'
     },
     filterContainerMobile: {
-        alignSelf:'center',
-        justifyContent:'space-around',
+        flex: 1.5,
+        width:'100%',
+        justifyContent:'center',
         alignItems:'center',
-        width: '80%',
-        marginTop:10,
+        marginTop:8,
         flexDirection: 'row',
-        flexWrap: 'wrap',
+        backgroundColor:'#E8E8E8',
     },
     categories: {
         flexDirection:'row',
         flexWrap:'wrap',
         justifyContent:'center',
         marginTop: 10,
-        gap:10
+        gap:10,
     },
     categoriesMobile: {
+        paddingBottom:10,
+        width:'95%',
         flexDirection:'row',
-        flexWrap:'wrap',
+        alignSelf:'center',
         justifyContent:'center',
-        marginTop: 10,
-        gap:10
+        gap:10,
+        backgroundColor:'#FFF',
+        paddingTop:20,
+        borderRadius:10,
+        shadowColor: "gray",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 10,
+        elevation: 16, // Android
+        borderColor:'silver'
     },
     buttonCategory: {
         width: 120,
         height:40,
         borderRadius: 5,
-        justifyContent:'center'
+        justifyContent:'center',
     },
     buttonCategoryMobile: {
-        width: 60,
-        height: 60,
         borderRadius: 100,
         justifyContent:'center',
         alignItems:'center',
+        // backgroundColor:'red'
     },
     iconContainer: {
         justifyContent:'center',
         alignItems:'center',
-        gap: 8
+        gap: 4,
+        width:'20%',
     },
     iconText: {
         color:'gray',
+        fontSize:18,
         fontWeight: 'bold'
+    },
+    textResultadosContainer:{
+        flex:0.5,
+        width:'100%',
+        flexDirection:'row',
+        paddingLeft:10,
+        paddingRight:10,
+        justifyContent:'space-between',
+    },
+    textResultados:{
+        fontSize:20,
+        alignSelf:'center',
+        fontWeight:'bold',
+    },
+    textCategory:{
+        fontSize: 14,
+        alignSelf:'center',
+        color:'silver'
     },
     searchInput: {
         backgroundColor:'#FFF',
@@ -135,11 +167,12 @@ const homeStyle = StyleSheet.create({
     },
     //MOBILE STYLES
     productsContainerMobile:{
-        width:'100%',
-        height: '72%',
-        backgroundColor:'#FFF',
+        width:'95%',
+        alignSelf:'center',
+        flex:5,
         justifyContent:'center',
         alignItems:'center',
+        borderRadius:10,
     },
     productCard: {
         width: '95%',
@@ -153,13 +186,20 @@ const homeStyle = StyleSheet.create({
         flexDirection:'row',
         padding:10,
         gap:5,
-        elevation:5,
+        shadowColor: "silver",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+        elevation: 16, // Android
         alignItems:'center'
     },
     productCardIcon:{
         justifyContent:'center',
         alignItems:'center',
-        width:'10%',
+        width:'12%',
         maxHeight:50,
         borderRadius: 100,
         padding:5
@@ -167,17 +207,15 @@ const homeStyle = StyleSheet.create({
     productCardInfo:{
         width:'90%'
     },
-    filterContainerMobile:{
-        height:'18%',
-        backgroundColor:'#FFF'
-    },
     homeContentMobile:{
         flex: 1,
-        backgroundColor: '#FFF',
+        justifyContent:'space-between',
+        backgroundColor: '#E8E8E8',
+        gap:5
+        
     },
     flatProducts:{
         alignItems:'center',
-        backgroundColor:'#FFF',
         width:'100%',
     }
 })

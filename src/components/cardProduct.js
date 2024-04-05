@@ -14,16 +14,16 @@ const CardProduct = ({id, product, stock, category}) => {
     if(filterCategory){
         cat = filterCategory?.value
         if(filterCategory?.value === 3){
-            icon = "arm-flex-outline"
-            color = '#f69a23'
+            icon = "star-outline"
+            color = '#ffc501'
         }
         if(filterCategory?.value === 5){
-            icon = "check-decagram-outline"
-            color = '#F57E25'
+            icon = "star-half-full"
+            color = '#fe9600'
         }
         if(filterCategory?.value === 15){
-            icon = "shield-star-outline"
-            color = '#F26524'
+            icon = "star"
+            color = '#FF5733'
         }
     }
 

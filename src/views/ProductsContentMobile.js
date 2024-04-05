@@ -24,7 +24,7 @@ const ProductsContentMobile = ()=>{
                     <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
                 }
                 data={renderProducts}
-                renderItem={({item}) => <CardProduct id={item.CODIGO} product={item?.PRODUCTO} stock={item?.CANTIDAD} category={ item?.CATEGORIA } />}
+                renderItem={({item}) => <CardProduct id={item.CODIGO} product={item?.PRODUCTO} stock={(Number(item?.CANTIDAD) + Number(item?.b1) + Number(item?.b2))} category={ item?.CATEGORIA } />}
                 keyExtractor={key => key.CODIGO}
             />
         </SafeAreaView>

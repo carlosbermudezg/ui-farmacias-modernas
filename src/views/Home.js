@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 import useSWR from 'swr'
-import { Platform } from "react-native"
+import { Platform, BackHandler } from "react-native"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Navbar from '../components/Navbar'
 import HomeWeb from './HomeWeb'
 import HomeMobile from './HomeMobile'
@@ -9,14 +10,44 @@ import { useDispatch } from 'react-redux'
 import { setProducts } from '../store/slices/products.slice'
 import { setRenderProducts } from '../store/slices/renderProducts.slice'
 import { setTotalPage } from '../store/slices/totalPage'
+import LoadingLogin from '../components/LoadingLogin'
+import ErrorData from '../components/ErrorData'
 
-const Home = ({ navigation })=>{
+const Home = ({ navigation, route })=>{
+
+    const VerifyLogin = async() =>{
+        const userLogged = await AsyncStorage.getItem('user')
+        const token = await AsyncStorage.getItem('token')
+        if (userLogged && token) {
+            return true
+        }
+        return false
+    }
+
+    useEffect(() => {
+        const backAction = () => {
+            const verify = VerifyLogin()
+            if(verify){
+                navigation.navigate('Main')
+            }else{
+                navigation.navigate('Login')
+            }
+            return true
+        }
+    
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          backAction,
+        );
+    
+        return () => backHandler.remove();
+      }, []);
 
     const dispatch = useDispatch()
 
     //swr
     const fetcher = (url)=> axios.get(url).then( res => res.data )
-    const { data, error, isLoading } = useSWR(`${process.env.EXPO_PUBLIC_APISHEYLA_URL}/products/`, fetcher,{ suspense: true })
+    const { data, isLoading, error } = useSWR(`${process.env.EXPO_PUBLIC_APISHEYLA_URL}/products/`, fetcher)
     dispatch(setProducts(data?.data))
     dispatch(setRenderProducts(data?.data.slice(0,5)))
     dispatch(setTotalPage(Math.ceil(data?.data.length / 5)))
@@ -40,8 +71,10 @@ const Home = ({ navigation })=>{
     // }, [])
 
     return(
+        isLoading === true ? <LoadingLogin></LoadingLogin>:
+        error ? <ErrorData></ErrorData>:
         <>
-        <Navbar navigation={ navigation } ></Navbar>
+        <Navbar navigation={ navigation } route={ route.name } ></Navbar>
         {
             Platform.OS === 'web' ?
             //WEB HOME

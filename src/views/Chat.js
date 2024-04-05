@@ -1,68 +1,88 @@
 import { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { List, MD3Colors, Button } from 'react-native-paper'
+import { List, Button } from 'react-native-paper'
 import { View, Text, TextInput, Platform } from "react-native"
 import loginStyle from "../../assets/styles/login"
 import axios from 'axios'
+import Navbar from '../components/Navbar'
+import { useSocket } from '../utils/SocketContext'
 
-const Chat = ()=>{
+const Chat = ({navigation, route})=>{
 
     const [chats, setChats] = useState([])
-    const [simpleChats, setSimpleChats] = useState([])
+    const [chatSelected, setChatSelected] = useState(0)
+    const [chatData, setChatData] = useState([])
     const [inputMessage, setInputMessage] = useState('')
+
+    const { socket, message } = useSocket()
+
+    useEffect(()=>{
+        if(message != null){
+            setChatData(message.content)
+        }
+    },[message])
 
     useEffect(() => {
         const getChats = async() =>{
             const userLogged = await AsyncStorage.getItem('user')
             const userParsed = await JSON.parse(userLogged)
-            await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/chats/${userParsed.idusers}`)
+            await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/chats/?id=${userParsed.idusers}`)
             .then(async(response) =>{
-                setSimpleChats(response.data)
+                const orderChatData = response.data.sort((a, b) => a.idchats - b.idchats)
+                setChats(orderChatData)
             })
             .catch((error) => {
                 console.log(error)
             } )
         }
         getChats()
-    }, [])
-    useEffect(() => {
-        const setChatsAsync = async() => {
-            simpleChats.map(async (chat) =>{
-                const userData = await getUserChat(chat)
-                setChats(...chats, [chat, userData])
-            })
-        }
-        setChatsAsync()
-    }, [simpleChats])
+    }, [chatSelected])
 
-    const getUserChat = async(chat) =>{
+    const selectChat = (idchat)=>{
+        setChatSelected(idchat)
+        const c = chats.find( chat => chat.idchats === idchat )
+        console.log(c)
+        if( c.content != '' ){
+            const parseChat = JSON.parse(c.content)
+            setChatData(parseChat)
+        } else {
+            setChatData([])
+        }
+    }
+
+    const sendMsgEnter = (key)=>{
+        if(key === 'Enter'){
+            sendMsg(chatSelected, inputMessage)
+            setInputMessage('')
+        }
+    }
+
+    const sendMsg = async(chatId, msg)=>{
         const userLogged = await AsyncStorage.getItem('user')
         const userParsed = await JSON.parse(userLogged)
-        if(userParsed.idusers === chat.iduser1){
-            const res = 
-                await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/users/one/${chat.iduser2}`)
-                    .then( (response) =>{
-                        return response.data[0]
-                    })
-                    .catch( (error) => {
-                        console.log(error)
-                    } )
-            return res
-        }else{
-            const res = 
-                await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/users/one/${chat.iduser1}`)
-                    .then( (response) =>{
-                        return response.data[0]
-                    })
-                    .catch( (error) => {
-                        console.log(error)
-                    } )
-            return res
+        const contenido = {
+            fechaHora : "fecha",
+            userSend : userParsed.idusers,
+            message : msg
         }
+        let data
+        if(chatData != ''){
+            data = {
+                idchats : chatId,
+                content : [...chatData, contenido]
+            }
+        }else{
+            data = {
+                idchats : chatId,
+                content : [contenido]
+            }
+        }
+        socket.emit('mensaje', data, contenido.userSend)
     }
 
     return(
         <>
+        <Navbar navigation={ navigation } route={ route.name } ></Navbar>
         <View style={ loginStyle.loginWrap }>
             {
                 Platform.OS === 'web' ?
@@ -72,9 +92,15 @@ const Chat = ()=>{
                             <List.Subheader>Chats</List.Subheader>
                             {
                                 chats.map((chat, index) =>{
-                                    console.log(chat)
                                     return (
-                                        <List.Item key={ index } title={ chat?.userData?.name } left={() => <List.Icon icon="account-supervisor" />} />
+                                        <List.Item 
+                                            key={ index } 
+                                            onPress={()=>{
+                                                selectChat(chat.idchats)
+                                            }} 
+                                            title={ chat.user.name } 
+                                            left={() => <List.Icon icon="account-supervisor" />} 
+                                        s/>
                                     )
                                 })
                             }
@@ -82,14 +108,23 @@ const Chat = ()=>{
                     </View>
                     <View style={ loginStyle.chatContent }>
                         <View style={ loginStyle.chatReading }>
-                            <Text>
-                                Hola
-                            </Text>
+                            {
+                                chatData?.map((element, index)=>{
+                                    return(
+                                        <Text key={index}>
+                                            { element?.message }
+                                        </Text>
+                                    )
+                                })
+                            }
                         </View>
                         <View style={ loginStyle.chatSending }>
                             <TextInput
                                 placeholder='Escribe tu mensaje'
                                 style={loginStyle.chatInput}
+                                onKeyPress={(e) => {
+                                    sendMsgEnter(e.nativeEvent.key)
+                                }}
                                 onChangeText={(value) =>{
                                     setInputMessage(value)
                                 }}
@@ -99,7 +134,8 @@ const Chat = ()=>{
                                 style={loginStyle.chatButton}
                                 onPress={(e) => {
                                     e.preventDefault()
-                                    navigation.navigate('Register')
+                                    sendMsg(chatSelected, inputMessage)
+                                    setInputMessage('')
                                 }}>
                                 Enviar
                             </Button>

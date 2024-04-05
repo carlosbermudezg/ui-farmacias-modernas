@@ -3,43 +3,43 @@ const categories = [
         id: 149,
         name: "Comisiones",
         value: 15,
-        color: '#F26524',
-        icon: 'shield-star-outline'
+        color: '#FF5733',
+        icon: 'star'
     },
     {
         id: 188,
         name: "Dependencia",
         value: 3,
-        color: '#f69a23',
-        icon: 'arm-flex-outline'
+        color: '#ffc501',
+        icon: 'star-outline'
     },
     {
         id: 194,
         name: "Competitivo",
         value: 3,
-        color: '#f69a23',
-        icon: 'arm-flex-outline'
+        color: '#ffc501',
+        icon: 'star-outline'
     },
     {
         id: 205,
         name: "Genericos",
         value: 5,
-        color: '#F57E25',
-        icon: 'check-decagram-outline'
+        color: '#fe9600',
+        icon: 'star-half-full'
     },
     {
         id: 206,
         name: "Comerciales",
         value: 5,
-        color: '#F57E25',
-        icon: 'check-decagram-outline'
+        color: '#fe9600',
+        icon: 'star-half-full'
     },
     {
         id: 207,
         name: "Comerciales con más utilidad",
         value: 5,
-        color: '#F57E25',
-        icon: 'check-decagram-outline'
+        color: '#fe9600',
+        icon: 'star-half-full'
     }
 ]
 

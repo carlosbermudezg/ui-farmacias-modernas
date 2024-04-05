@@ -3,11 +3,20 @@ import { View } from "react-native"
 import { Icon, Text, FAB } from "react-native-paper"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
-import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
 
 const DrawerContent = (props)=>{
 
-    const user = useSelector( state => state.user )
+    const [user, setUser] = useState({})
+
+    useEffect(()=>{
+        async function getUser(){
+            const userLogged = await AsyncStorage.getItem('user')
+            const response = JSON.parse(userLogged)
+            setUser(response)
+        }
+        getUser()
+    },[])
 
     return(
         <View style={ drawerStyle.container }>

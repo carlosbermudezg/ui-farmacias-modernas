@@ -4,7 +4,8 @@ const drawerStyle = StyleSheet.create({
     container: {
      backgroundColor:'transparent',
      height: Dimensions.get('window').height - 40,
-     gap:10
+     gap:10,
+     paddingTop:20
     },
     header: {
         flexDirection:'row',

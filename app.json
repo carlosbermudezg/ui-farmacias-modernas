@@ -5,7 +5,7 @@
       "translucent": false
     },
     "name": "ui-system",
-    "slug": "ui-system",
+    "slug": "farmacias-modernas",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -34,6 +34,15 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "492f9c13-5b84-4e08-a92f-ea99784c8288"
+      }
+    },
+    "owner": "cbermudezg7"
   }
 }

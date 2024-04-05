@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setSearchQuery } from "../store/slices/searchQuery.slice"
 import { setPage } from "../store/slices/page.slice"
 
-const Navbar = ({ navigation })=>{
+const Navbar = ({navigation, route})=>{
 
     const dispatch = useDispatch()
     const searchQuery = useSelector( state => state.searchQuery )
@@ -17,37 +17,38 @@ const Navbar = ({ navigation })=>{
     return(
         <Appbar.Header style={ homeStyle.appbar }>
             {
-                searchBarIsVisible === false ? 
+                searchBarIsVisible === false && searchQuery === '' || Platform.OS === 'web' ? 
                     <>
                         <Appbar.Action icon="menu" iconColor='#fff' onPress={() => { navigation.openDrawer() }} />
-                        <Appbar.Content color='#fff' title="Productos"/>
+                        <Appbar.Content color='#fff' title={ route } />
                     </>
                 : 
-                    <>
-                        <Icon
-                            source="shield-search"
-                            color='#fff'
-                            size={24}
-                        />
-                        <TextInput
-                            autoFocus={true}
-                            onEndEditing={()=>{
-                                setSearchBarIsVisible(false)
-                            }}
-                            selectionColor='#f69a23'
-                            placeholderTextColor='#FFFFFF'
-                            style={ homeStyle.searchInputMobile } 
-                            placeholder={ searchValue }
-                            onChangeText={(value)=>{
-                                dispatch( setPage( 1 ) )
-                                dispatch(setSearchQuery(value))
-                            }} 
-                            value={searchQuery}
-                        />
-                    </>
+                Platform.OS != 'web' ? 
+                <>
+                    <Icon
+                        source="shield-search"
+                        color='#fff'
+                        size={24}
+                    />
+                    <TextInput
+                        autoFocus={true}
+                        onEndEditing={()=>{
+                            setSearchBarIsVisible(false)
+                        }}
+                        selectionColor='#f69a23'
+                        placeholderTextColor='#FFFFFF'
+                        style={ homeStyle.searchInputMobile } 
+                        placeholder={ searchValue }
+                        onChangeText={(value)=>{
+                            dispatch( setPage( 1 ) )
+                            dispatch(setSearchQuery(value))
+                        }} 
+                        value={searchQuery}
+                    />
+                </> : false
             }
             {
-                Platform.OS != 'web' && searchBarIsVisible === false ? 
+                Platform.OS != 'web' && searchBarIsVisible === false && route === 'Productos' ? 
                     <Appbar.Action iconColor='#fff' icon="magnify" 
                         onPress={() => { setSearchBarIsVisible(!searchBarIsVisible) }} 
                     />: false

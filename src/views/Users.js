@@ -1,10 +1,11 @@
 import { View, Text, Image } from "react-native"
 import loginStyle from "../../assets/styles/login"
-const LogoFarmaciasLopez =  require('../../public/farmacias-lopez.jpg')
+import Navbar from "../components/Navbar"
 
-const Users = ()=>{
+const Users = ({ navigation, route })=>{
     return(
         <>
+        <Navbar navigation={ navigation } route={ route.name } ></Navbar>
         <View style={ loginStyle.loginWrap }>
             <Text>
                 Users
