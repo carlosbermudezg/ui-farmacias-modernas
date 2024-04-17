@@ -22,6 +22,9 @@ const drawerStyle = StyleSheet.create({
         borderRadius:100,
         padding:10
     },
+    userData:{
+        flex:1,
+    },
     menu: {
         backgroundColor:'#FFF',
         borderTopRightRadius:10,

@@ -4,11 +4,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import DrawerContent from '../components/DrawerContent'
 import { Icon } from 'react-native-paper'
 import { SocketProvider } from '../utils/SocketContext'
-import { Button } from 'react-native-paper'
-
-import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
 
 const Drawer = createDrawerNavigator()
 
@@ -23,47 +18,6 @@ const Main = ()=>{
     const [user, setUser] = useState({})
 
     useEffect(() => {
-        registerForPushNotificationsAsync();
-    
-        Notifications.addNotificationReceivedListener(handleNotification);
-        Notifications.addNotificationResponseReceivedListener(handleNotificationResponse);
-    
-        return () => {
-          Notifications.removeNotificationSubscription(handleNotification);
-          Notifications.removeNotificationSubscription(handleNotificationResponse);
-        };
-      }, []);
-    
-      const handleNotification = notification => {
-        console.log('Notificación recibida:', notification);
-      };
-    
-      const handleNotificationResponse = response => {
-        console.log('Respuesta a la notificación:', response);
-      };
-    
-      const registerForPushNotificationsAsync = async () => {
-        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-        if (status !== 'granted') {
-          alert('La aplicación no tiene permiso para recibir notificaciones push.');
-          return;
-        }
-    
-        const token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log('Token de notificación push:', token);
-      };
-    
-      const enviarNotificacion = async () => {
-        await Notifications.scheduleNotificationAsync({
-          content: {
-            title: '¡Hola desde Expo!',
-            body: 'Esta es una notificación push enviada desde Expo.',
-          },
-          trigger: null,
-        });
-      };
-
-    useEffect(() => {
         VerifyPermisos()
     }, [])
 
@@ -73,7 +27,7 @@ const Main = ()=>{
     }
 
     return (
-        <SocketProvider url="http://localhost:3000">
+        <SocketProvider url={`${process.env.EXPO_PUBLIC_SOCKET_URL}`}>
             <Drawer.Navigator
                 screenOptions={{
                     headerShown: false,
@@ -155,7 +109,6 @@ const Main = ()=>{
                 }
                 <Drawer.Screen options={ {headerShown: false, drawerItemStyle:{ display: 'none' }} } name="Salir" component={ LoginOut } />
             </Drawer.Navigator>
-            <Button onPress={()=> enviarNotificacion() }>Enviar notificacion</Button>
         </SocketProvider>
     )
 }

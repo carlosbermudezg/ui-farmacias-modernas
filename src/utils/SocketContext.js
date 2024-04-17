@@ -12,6 +12,7 @@ export const SocketProvider = ({ url, children }) => {
     
   const [socket, setSocket] = useState(null);
   const [message, setMessage] = useState(null);
+  const [lastMessage, setLastMessage] = useState(null);
 
   useEffect(() => {
     const socket = async()=>{
@@ -25,15 +26,20 @@ export const SocketProvider = ({ url, children }) => {
         })
         setSocket(socket);
 
-        socket.on('mensaje', (data) => {
-          setMessage(data);
+        socket.on('mensaje', (message) => {
+          const parseMessage = JSON.parse(message)
+          const parsedUser = JSON.parse(user)
+          if(parsedUser.idusers != parseMessage.userSend){
+            setLastMessage(parseMessage)
+          }
+          setMessage(parseMessage);
         });
     }
     socket()
   }, [url]);
 
   return (
-    <SocketContext.Provider value={{socket, message}}>
+    <SocketContext.Provider value={{socket, message, lastMessage}}>
       {children}
     </SocketContext.Provider>
   );

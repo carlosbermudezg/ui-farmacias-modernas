@@ -30,7 +30,7 @@ const DrawerContent = (props)=>{
                 </View>
                 <View style={ drawerStyle.userData }>
                     <Text variant="titleMedium" >Bienvenid@</Text>
-                    <Text variant="bodySmall">{ user.name }</Text>
+                    <Text variant="bodySmall" numberOfLines={2}>{ user.name }</Text>
                 </View>
             </View>
             <DrawerContentScrollView style= { drawerStyle.menu } {...props}>

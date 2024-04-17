@@ -25,6 +25,12 @@ const loginStyle = StyleSheet.create({
         borderTopStartRadius: 30,
         borderTopRightRadius: 30
     },
+    chatWrap: {
+        flex: 1,
+        backgroundColor: '#662D91',
+        justifyContent: 'center',
+        alignItems:'center',
+    },
     loginContainer: {
         flex:1,
         justifyContent:'center',
@@ -99,37 +105,104 @@ const loginStyle = StyleSheet.create({
         alignItems:'center',
     },
     chat: {
-        width:'100%',
+        width:'70%',
         flex:1,
-        flexDirection:'row'
+        flexDirection:'row',
+        marginTop:20,
+        marginBottom: 20,
+        padding:10,
+        backgroundColor:'#EBEDEF',
+        height: Dimensions.get('window').height,
+        borderRadius:20,
+        overflow:'hidden',
+        gap:15,
+        shadowColor: "#283747",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+        elevation: 16, // Android
     },
     chatContacts: {
-        backgroundColor: 'silver',
-        width: '20%',
-        height: Dimensions.get('window').height,
+        flex:2,
+        gap:10
+    },
+    userChat:{
+        flexDirection:'row',
+        paddingTop:15,
+        paddingBottom:15,
+        paddingRight:15,
+        gap:10,
+        alignItems:'center',
+    },
+    noChatSelected:{
+        justifyContent:'center',
+        alignItems:'center',
+        flex: 4
+    },
+    chatContactsSection: {
+        flex:9,
+        borderRadius:20,
+        backgroundColor:'#FFF'
+    },
+    chatContactsSectionMobile: {
+        width: Dimensions.get('screen').width,
+        flex:1,
+        borderTopRightRadius:20,
+        borderTopLeftRadius:20,
+        backgroundColor:'#FFF'
+    },
+    contact: {
+        padding: 10,
+    },
+    userNameChat: {
+        flex:1,
+        backgroundColor:'#D6DBDF',
+        flexDirection:'row',
+        alignItems:'center',
+        gap:10,
+        borderRadius:10,
+        padding: 5
     },
     chatContent: {
-        backgroundColor:'green',
-        width: '80%',
-        height: Dimensions.get('window').height,
+        flex:4,
+        gap:10
     },
     chatSending: {
-        flexDirection:'row'
+        flex: 1,
+        flexDirection:'row',
+        backgroundColor:'#FFF',
+        padding:10,
+        borderRadius:30,
+        alignItems:'center',
+        gap:10
     },
     chatInput: {
-        borderWidth: 1,
         backgroundColor:'#fff',
-        borderColor:'#662D91',
-        width:'85%',
-        padding: 10
+        flex:8,
+        outlineWidth: 0,
+        outline: 'none', 
+        MozAppearance: 'textfield',
+        padding:15
     },
-    chatButton: {
-        width:'15%',
-        borderRadius:0
+    chatSendButton: {
+        flex:1,
+    },
+    chatAttachButton: {
+        flex:1,
+        backgroundColor:'transparent',
+        borderWidth:1,
+        borderColor:'red'
     },
     chatReading: {
-        height: '80%',
-        backgroundColor:'yellow'
+        flex: 8,
+        overflow:'hidden',
+    },
+    flatMessages: {
+        padding: 10,
+        gap:10
     }
 })
 
