@@ -45,14 +45,6 @@ const loginStyle = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16
     },
-    login: {
-        borderRadius: 5,
-        backgroundColor: '#662D91',
-        marginTop: 10
-    },
-    loginText: {
-        color:'white'
-    },
     loginInput: {
         padding: 10,
         borderRadius: 30,
@@ -149,6 +141,7 @@ const loginStyle = StyleSheet.create({
     },
     chatContactsSectionMobile: {
         width: Dimensions.get('screen').width,
+        height:500,
         flex:1,
         borderTopRightRadius:20,
         borderTopLeftRadius:20,

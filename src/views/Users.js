@@ -1,4 +1,4 @@
-import { View, Text, Image, Platform, ScrollView } from "react-native"
+import { View, Text, Image, Platform, ScrollView, Dimensions } from "react-native"
 import homeStyle from "../../assets/styles/home";
 import { DataTable, Avatar, Card, IconButton } from "react-native-paper";
 import Navbar from "../components/Navbar"
@@ -6,18 +6,30 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUsers } from "../store/slices/users.slice";
+import { useState, useEffect } from 'react'
 
 const Users = ({ navigation, route })=>{
+
+    const [render, setRender] = useState(false)
 
     const dispatch = useDispatch()
     const users = useSelector( state => state.users )
 
-    //swr
-    const fetcher = (url)=> axios.get(url).then( res => res.data )
-    const { data, isLoading, error } = useSWR(`${process.env.EXPO_PUBLIC_API_URL}/users`, fetcher)
-    dispatch(setUsers(data))
-    // dispatch(setRenderProducts(data?.data.slice(0,5)))
-    // dispatch(setTotalPage(Math.ceil(data?.data.length / 5)))
+    useEffect(()=>{
+        axios.get(`${process.env.EXPO_PUBLIC_API_URL}/users`)
+            .then( res => dispatch(setUsers(res.data)) )
+            .catch( error => console.log( error ) )
+    },[render])
+    
+    const changeUserStatus = async(userId, status)=>{
+        const state = status === 1 ? 0 : 1
+        await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/users/changeStatus?id=${userId}&state=${state}`)
+            .then( response =>{
+                console.log(response)
+            } )
+            .catch( error => console.log( error ) )
+        setRender(!render)
+    }
 
     return(
         <>
@@ -64,13 +76,13 @@ const Users = ({ navigation, route })=>{
                                                 icon="account-off"
                                                 iconColor='red'
                                                 size={20}
-                                                onPress={() => console.log('Pressed')}
+                                                onPress={() => changeUserStatus(user.idusers, user.active)}
                                             />:
                                             <IconButton
                                                 icon="account-check"
                                                 iconColor='green'
                                                 size={20}
-                                                onPress={() => console.log('Pressed')}
+                                                onPress={() => changeUserStatus(user.idusers, user.active)}
                                             />
                                     }
                                 </DataTable.Cell>

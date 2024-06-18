@@ -12,6 +12,17 @@ const paginationStyle = StyleSheet.create({
         borderWidth: 0.3,
         borderColor:'silver'
     },
+    paginationRecetas: {
+        backgroundColor:'#FFF',
+        width:'100%',
+        flex:1,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-around',
+        elevation: 16, // Android
+        borderWidth: 0.3,
+        borderColor:'silver'
+    },
     paginationButtons: {
         maxWidth:'50',
         padding:0,

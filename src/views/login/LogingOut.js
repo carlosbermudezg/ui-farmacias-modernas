@@ -3,7 +3,7 @@ import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 import { Text, View } from "react-native"
 import { useEffect } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import loginStyle from '../../assets/styles/login';
+import loginStyle from '../../../assets/styles/login';
 
 const LoginOut = ({navigation})=>{
 

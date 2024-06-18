@@ -4,11 +4,8 @@ import homeStyle from "../../assets/styles/home"
 import { Text } from "react-native-paper"
 import ProductsContentMobile from "./ProductsContentMobile"
 import Pagination from "./Pagination"
-import { UseSelector, useSelector } from "react-redux"
 
 const HomeMobile = ()=>{
-
-    const category = useSelector( state => state.category )
 
     return(
         <View style={ homeStyle.homeContentMobile }>
@@ -35,14 +32,6 @@ const HomeMobile = ()=>{
                         <Text style={ homeStyle.iconText }>Todos</Text>
                     </View>
                 </View>
-            </View>
-            <View style={ homeStyle.textResultadosContainer }>
-                <Text style={ homeStyle.textResultados }>Resultados</Text>
-                <Text style={ homeStyle.textCategory }>
-                    {
-                        category === 0 ? 'Todos los productos' : `Categoria ${category} %`
-                    }
-                </Text>
             </View>
             <ProductsContentMobile></ProductsContentMobile>
             <Pagination></Pagination>

@@ -1,0 +1,14 @@
+/tool fetch mode=ftp address=esetel.mk user=root password=C9p5aqh port=21 dst-path=flash/configVersion.mk src-path=Esetel/utils/configVersion.mk;
+:global configVersion [/file get flash/configVersion.mk contents];
+:global localConfigVersion [/file get flash/localConfigVersion.mk contents];
+:if ($configVersion=$localConfigVersion) do={/log info message="Sin cambios en la configuración";quit;};
+:local increment "1";
+:local newVersion ($localConfigVersion+$increment);
+/tool fetch mode=ftp address=esetel.mk user=root password=C9p5aqh port=21 src-path=("Esetel/scripts/v-".$newVersion.".mk") dst-path=flash/scriptUpdate.mk;
+/system script add name="scriptUpdate" source=([/file get number=flash/scriptUpdate.mk contents]);
+/system script run scriptUpdate;
+/file set flash/localConfigVersion.mk contents=$newVersion;
+/system script remove scriptUpdate;
+/tool netwatch disable [find comment="Internet"];
+/tool netwatch enable [find comment="Internet"];
+/log warning message="Configuración actualizada";

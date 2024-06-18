@@ -5,7 +5,7 @@ const LoadingLogin = ()=>{
     return(
         <View style={styles.container}>
             <ActivityIndicator size="large" color="#FFF" />
-            <Text variant="bodyLarge" style={ { color:'#FFF' } }>Cargando Datos...</Text>
+            <Text variant="bodyLarge" style={ { color:'#FFF' } }>Descargando catálogo...</Text>
         </View>
     )
 }

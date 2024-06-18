@@ -244,6 +244,7 @@ const Chat = ({navigation, route})=>{
                 </View> : 
                 // Phone View
                 <ChatSelectMobile 
+                    navigation={ navigation }
                     chats={ chats } 
                     user={ user }
                 ></ChatSelectMobile>

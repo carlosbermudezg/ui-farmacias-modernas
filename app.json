@@ -1,7 +1,7 @@
 {
   "expo": {
     "androidStatusBar": {
-      "backgroundColor": "#F57E24",
+      "backgroundColor": "transparent",
       "translucent": false
     },
     "name": "ui-system",
