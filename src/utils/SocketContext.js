@@ -18,7 +18,7 @@ export const SocketProvider = ({ url, children }) => {
     const socket = async()=>{
         const token = await AsyncStorage.getItem('token')
         const user = await AsyncStorage.getItem('user')
-        const socket = io(url, {
+        const socket = io(url, { 
             query: {
                 "user" : user,
                 "token" : token

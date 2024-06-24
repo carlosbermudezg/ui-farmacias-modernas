@@ -15,6 +15,8 @@ import selectedZonesSlice from './slices/register/selectedZones.slice'
 import userTypeSlice from './slices/register/userType.slice'
 import zonesSlice from './slices/register/zones.slice'
 import snackbarSlice from './slices/info/snackbar.slice'
+import editUserSlice from './slices/users/editUser.slice'
+import sheylaSlice from './slices/sheyla/sheyla.slice'
 
 export default configureStore({
   reducer: {
@@ -26,6 +28,7 @@ export default configureStore({
         categoryUser: categoryUserSlice,
         searchQuery: searchQuerySlice,
         user: userSlice,
+        editUser: editUserSlice,
         users: usersSlice,
         brands: brandsSlice,
         zones: zonesSlice,
@@ -35,6 +38,8 @@ export default configureStore({
         userType: userTypeSlice,
         selectedZones: selectedZonesSlice,
         // info
-        snackbar: snackbarSlice
+        snackbar: snackbarSlice,
+        // sheyla api
+        sheyla: sheylaSlice
 	}
 })

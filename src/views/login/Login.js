@@ -52,6 +52,7 @@ const Login = ({ navigation })=>{
                     dispatch(setUser(response.data.user))
                     AsyncStorage.setItem('user', JSON.stringify(response.data.user))
                     AsyncStorage.setItem('token', response.data.token)
+                    AsyncStorage.setItem('token2', response.data.admin_token)
                     navigation.navigate('Main')
                     setLoadingLogin(false)
                 },2000)
@@ -79,7 +80,7 @@ const Login = ({ navigation })=>{
                         source={ LogoFarmaciasModernas }  
                     />
                     <TextInputComponent
-                        label="Usuario"
+                        label="Email"
                         labelColor='silver'
                         color='#FFF'
                         borderColor='#662D91'
@@ -95,7 +96,7 @@ const Login = ({ navigation })=>{
                     />
                     {
                         loadingLogin ? 
-                        <Loading></Loading> : 
+                        <Loading color="#7A428D"></Loading> : 
                         <>
                             <ButtonComponent 
                                 title="Entrar" 

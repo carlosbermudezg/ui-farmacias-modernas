@@ -1,7 +1,7 @@
 import {View, StyleSheet, TextInput, Text} from 'react-native';
 import { useState, useEffect } from 'react'
 
-const TextInputComponent = ({ val, label, labelColor, inputColor, color, borderColor, secureTextEntry, onChange }) => {
+const TextInputComponent = ({ val, label, labelColor, inputColor, color, borderColor, secureTextEntry, onChange, readOnly = false }) => {
 
     const styles = StyleSheet.create({
         container:{
@@ -61,7 +61,7 @@ const TextInputComponent = ({ val, label, labelColor, inputColor, color, borderC
         if(val){
             setIsLabelFloating(true)
         }
-    },[])
+    },[val])
 
     
     const handleChangeText = (text) => {
@@ -74,6 +74,7 @@ const TextInputComponent = ({ val, label, labelColor, inputColor, color, borderC
     return (
         <View style={styles.container}>
         <TextInput
+            readOnly={readOnly}
             value={val}
             secureTextEntry={secureTextEntry}
             style={[styles.input, islabelFloating && styles.inputSelected, styles.inputText]}

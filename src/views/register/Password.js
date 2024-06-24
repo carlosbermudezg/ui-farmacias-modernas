@@ -10,11 +10,14 @@ import { setSelectedZones } from '../../store/slices/register/selectedZones.slic
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import register from './register'
+import Loading from '../../components/Loading'
 
 const Password = ({navigation})=>{
 
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
+    const [disabled, setDisabled] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const data = useSelector(state => state.data)
     const type = useSelector(state => state.userType)
@@ -25,6 +28,8 @@ const Password = ({navigation})=>{
     const dispatch = useDispatch()
 
     const registration = async() =>{
+        setDisabled(true)
+        setLoading(true)
         const user = {
             "name": data.name,
             "username": data.username,
@@ -36,7 +41,7 @@ const Password = ({navigation})=>{
             "zones": JSON.stringify(selectedZones)
         }
         const createUser = await register(user)
-        if(createUser){ 
+        if(createUser){
             setTimeout(()=>{
                 dispatch(setSnackbar([true, 'El usuario ha sido registrado, Ahora debe esperar a ser admitido por el Administrador']))
                 dispatch(setData({
@@ -50,10 +55,12 @@ const Password = ({navigation})=>{
                 dispatch(setUserType(''))
                 setPassword('')
                 setRepeatPassword('')
+                setDisabled(false)
+                setLoading(false)
             }, 2000)
             setTimeout(()=>{
                 navigation.navigate('Login')
-            },3500)
+            },4000)
         }
     }
 
@@ -73,6 +80,7 @@ const Password = ({navigation})=>{
                         <TextInputComponent
                             label="Contraseña"
                             labelColor='silver'
+                            readOnly={disabled}
                             secureTextEntry={true}
                             color='#7A428D'
                             borderColor='#F2F3F4'
@@ -82,44 +90,50 @@ const Password = ({navigation})=>{
                         <TextInputComponent
                             label="Repite Contraseña"
                             labelColor='silver'
+                            readOnly={disabled}
                             secureTextEntry={true}
                             color='#7A428D'
                             borderColor='#F2F3F4'
                             inputColor="#FFF"
                             onChange={ (e) => setRepeatPassword(e)}
                         />
-                        <ButtonComponent 
-                            title="Regresar" 
-                            iconName="arrow-left"
-                            secureTextEntry={true}
-                            color="silver"
-                            textColor='#FFF'
-                            borderColor="silver"
-                            iconColor="#FFF"
-                            onPress={() => navigation.navigate('Zones') }
-                        >
-                        </ButtonComponent>
-                        <ButtonComponent 
-                            title="Crear Cuenta" 
-                            iconName="account"
-                            color="#f69a23"
-                            textColor='#FFF'
-                            borderColor="#f69a23"
-                            iconColor="#FFF"
-                            onPress={() => {
-                                if(!password){
-                                    dispatch(setSnackbar([true, "Escribe una contraseña."]))
-                                    return
-                                }
-                                if(password != repeatPassword){
-                                    dispatch(setSnackbar([true, "Las contraseñas no coinciden."]))
-                                    return
-                                }else{
-                                    registration()
-                                }
-                            } }
-                        >
-                        </ButtonComponent>
+                        {
+                            loading ? <Loading color="#BB8FCE"></Loading> :
+                            <>
+                                <ButtonComponent 
+                                    title="Regresar" 
+                                    iconName="arrow-left"
+                                    secureTextEntry={true}
+                                    color="silver"
+                                    textColor='#FFF'
+                                    borderColor="silver"
+                                    iconColor="#FFF"
+                                    onPress={() => navigation.navigate('Zones') }
+                                >
+                                </ButtonComponent>
+                                <ButtonComponent 
+                                    title="Crear Cuenta" 
+                                    iconName="account"
+                                    color="#f69a23"
+                                    textColor='#FFF'
+                                    borderColor="#f69a23"
+                                    iconColor="#FFF"
+                                    onPress={() => {
+                                        if(!password){
+                                            dispatch(setSnackbar([true, "Escribe una contraseña."]))
+                                            return
+                                        }
+                                        if(password != repeatPassword){
+                                            dispatch(setSnackbar([true, "Las contraseñas no coinciden."]))
+                                            return
+                                        }else{
+                                            registration()
+                                        }
+                                    } }
+                                >
+                                </ButtonComponent>
+                            </>
+                        }
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export const userSlice = createSlice({
   name: 'user',
@@ -7,7 +7,6 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       return action.payload
     }
-
   }
 })
 

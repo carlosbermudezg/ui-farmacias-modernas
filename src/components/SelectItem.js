@@ -35,7 +35,7 @@ const SelectItem = ({selected, title, onPress, backgroundColor, borderColor, tex
                 selected && 
                 <Icon
                     source="check-circle-outline"
-                    color={textColor}
+                    color={textSelectedColor}
                     size={20}
                     style={styles.icon}
                 />
