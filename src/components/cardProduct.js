@@ -2,10 +2,18 @@ import homeStyle from "../../assets/styles/home";
 import { View } from "react-native";
 import { Text, Icon } from "react-native-paper";
 import categories from "../utils/Categories";
+import { useSelector } from "react-redux";
 
-const CardProduct = ({id, product, stock, category}) => {
+const CardProduct = ({ item }) => {
  
-    const filterCategory = categories.find( element => category === element.id )
+    const filterCategory = categories.find( element => item.CATEGORIA === element.id )
+    const bodegas = useSelector( state => state.selectBodega)
+    // const stock = (Number(item?.CANTIDAD) + Number(item?.b1) + Number(item?.b2))
+
+    const stock = bodegas.reduce((acc, current)=>{
+        const add = acc + Number(item[current])
+        return add
+    }, 0)
 
     let cat = "0"
     let icon = "all-inclusive"
@@ -39,7 +47,7 @@ const CardProduct = ({id, product, stock, category}) => {
             </View>
             <View style={ homeStyle.productCardInfo }>
                 <Text style={ { fontWeight:'bold' } } numberOfLines={3}>
-                    { product }
+                    { item.PRODUCTO }
                 </Text>
                 <Text>
                     {`Cantidad en Stock: ${stock}`}

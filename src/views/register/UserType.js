@@ -31,8 +31,8 @@ const UserType = ({navigation})=>{
                                 title="Médico"
                                 backgroundColor='transparent'
                                 borderColor="#D7BDE2"
-                                selectedColor='#662D91'
-                                borderColorSelected='#662D91'
+                                selectedColor='#E74C3C'
+                                borderColorSelected='#E74C3C'
                                 textColor='#FFF' 
                                 textSelectedColor="#FFF"
                                 onPress={()=> dispatch(setUserType('1')) }
@@ -43,8 +43,8 @@ const UserType = ({navigation})=>{
                                 title="Visitador Médico" 
                                 backgroundColor='transparent'
                                 borderColor="#D7BDE2"
-                                selectedColor='#662D91'
-                                borderColorSelected='#662D91'
+                                selectedColor='#E74C3C'
+                                borderColorSelected='#E74C3C'
                                 textColor='#FFF' 
                                 textSelectedColor="#FFF"
                                 onPress={()=> dispatch(setUserType('2')) }

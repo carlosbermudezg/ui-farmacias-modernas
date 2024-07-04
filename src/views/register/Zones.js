@@ -32,7 +32,7 @@ const Zones = ({navigation})=>{
         <>
             <Appbar.Header style={ styles.appbar }>
                 <Appbar.BackAction color='#fff'  onPress={() => { navigation.navigate('Brands') }} />
-                <Appbar.Content color='#fff' title="Volver a Marcas" />
+                <Appbar.Content color='#fff' title="Volver a Laboratorios"/>
             </Appbar.Header>
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={ styles.container }>
                 <ScrollView contentContainerStyle={styles.scrollView}>
@@ -75,7 +75,7 @@ const Zones = ({navigation})=>{
                             title="Siguiente" 
                             iconName="arrow-right"
                             color="#f69a23"
-                            textColor='#FFF'
+                            textColor='#FFF' 
                             borderColor="#f69a23"
                             iconColor="#FFF"
                             onPress={() => {

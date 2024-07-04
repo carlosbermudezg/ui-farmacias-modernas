@@ -10,6 +10,7 @@ import ErrorData from '../components/ErrorData'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSheylaUrlThunk } from '../store/slices/sheyla/sheyla.slice'
 import { setProductsThunk } from '../store/slices/products.slice'
+import ModalZone from './zones/components/ModalZone'
 
 import * as Notifications from 'expo-notifications';
 
@@ -128,6 +129,7 @@ const Home = ({ navigation, route })=>{
             //MOBILE HOME
             <HomeMobile></HomeMobile>
         }
+        <ModalZone></ModalZone>
         </>
     )
 }

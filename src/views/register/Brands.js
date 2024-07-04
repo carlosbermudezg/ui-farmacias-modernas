@@ -20,7 +20,7 @@ const Brands = ({navigation})=>{
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={ styles.container }>
                 <ScrollView contentContainerStyle={styles.scrollView}>
                     <View style={styles.header}>
-                        <Text style={styles.title}>Marcas</Text>
+                        <Text style={styles.title}>Laboratorios</Text>
                         <Text style={styles.subtitle}>Elije que las marcas con las que trabajas.</Text>
                     </View>
                     <MyBrands></MyBrands>

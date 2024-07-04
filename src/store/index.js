@@ -23,6 +23,9 @@ import recetaYearSlice from './slices/recetas/recetaYear.slice'
 import selectedRecetaSlice from './slices/recetas/selectedReceta.slice'
 import modalVisibleSlice from './slices/recetas/modalVisible.slice'
 import userRendimientoSlice from './slices/rendimiento/userRendimiento.slice'
+import selectBodegaSlice from './slices/zonas/selectBodega.slice'
+import modalZoneSlice from './slices/zonas/modalZone.slice'
+import myZoneSlice from './slices/zonas/myZone.slice'
 
 export default configureStore({
   reducer: {
@@ -54,6 +57,10 @@ export default configureStore({
         selectedReceta: selectedRecetaSlice, 
         modalVisible: modalVisibleSlice,
         // rendimiento
-        userRendimiento: userRendimientoSlice 
+        userRendimiento: userRendimientoSlice, 
+        // Products zone
+        selectBodega: selectBodegaSlice,
+        modalZone: modalZoneSlice,
+        myZone : myZoneSlice
 	}
 })

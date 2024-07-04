@@ -16,7 +16,7 @@ const RendimientoMedico = ({ navigation, route })=>{
     const [months, setMonths] = useState([])
 
     useEffect(()=>{
-        const getMonths = async()=>{ 
+        const getMonths = async()=>{
             const token = await AsyncStorage.getItem('token')
             await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/recetas/getByMonthUser/?year=${year}&id=${selectedUser.idusers}`, { 
                 headers: {
