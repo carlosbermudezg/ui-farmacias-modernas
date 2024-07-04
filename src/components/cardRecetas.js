@@ -1,43 +1,110 @@
-import homeStyle from "../../assets/styles/home"
-import { View, Pressable } from "react-native"
-import { Text, Icon } from "react-native-paper"
-import axios from "axios"
-import { useEffect, useState } from 'react'
+import { View, StyleSheet, Image } from "react-native"
+import { Text, Icon, TouchableRipple } from "react-native-paper"
+import { FormatDate } from "../utils/FormatDate"
+import { useState, useEffect } from 'react'
+import { useDispatch } from "react-redux"
+import { setSelectedReceta } from '../store/slices/recetas/selectedReceta.slice'
+import { setModalVisible } from "../store/slices/recetas/modalVisible.slice"
 
-const CardRecetas = ({numRecetas, idrecetas, iduser, idusercreate, fechaHora, image, medicamentos}) => {
 
-    // const [user, setUser] = useState([]) 
+const CardRecetas = ({ receta }) => {
+    
+    const dispatch = useDispatch()
 
-    // useEffect(()=>{
-    //     axios.get(`${process.env.EXPO_PUBLIC_API_URL}/users/one/${iduser}`)
-    //         .then( response => setUser(response.data[0]) )
-    //         .catch( error => console.log( error ) )
-    // },[])
+    const showModal = ()=>{
+        dispatch(setSelectedReceta(receta))
+        dispatch(setModalVisible(true))
+    }
+
+    const [value, setValue] = useState(0)
+    const items = JSON.parse(receta.medicamentos) 
+
+    useEffect(()=>{
+        const getResult = async()=>{
+            const result = await items.reduce((acumulador, item) => {
+                const res = ((item.costo * item.porcentaje / 100) * item.cantidad).toFixed(2)
+                return acumulador + Number(res);
+            }, 0)
+            setValue(result)
+        }
+        getResult()
+    },[])
 
     return(
-        <Pressable
-            onPress={()=> console.log(idrecetas) }
+        <TouchableRipple
+            style={styles.wrap}
+            onPress={()=> showModal()}
         >
-            <View style={ homeStyle.productCard }>
-                <View style={[ homeStyle.productCardIcon, { backgroundColor: 'green' } ]}>
+            <View style={ styles.container }>
+                <View style={styles.icon}>
+                    {/* {
+                        receta.image != '' ? 
+                            <Image source={{ uri: receta.image }} style={{ width: 40, height: 40 }} /> 
+                            : 
+                            <Icon
+                                source="file-document-outline"
+                                color='silver'
+                                size={40}
+                            /> 
+                    } */}
                     <Icon
-                        source='all-inclusive'
-                        color={"#FFF"}
-                        size={14}
+                        source="file-document-outline"
+                        color='silver'
+                        size={40}
                     />
-                    <Text style={ { color:'#FFF', fontSize: 10 } }>{ image }</Text>
                 </View>
-                <View style={ homeStyle.productCardInfo }>
+                <View style={ styles.info }>
                     <Text style={ { fontWeight:'bold' } } numberOfLines={3}>
-                        N° Receta: { numRecetas }
+                        N° Receta: { receta.numReceta }
                     </Text>
                     <Text>
-                        {`Fecha de Ingreso: ${fechaHora}`}
+                        {`Fecha de Ingreso: ${FormatDate(receta.fechaHora)}`}
+                    </Text>
+                    <Text>
+                        Estado: {receta.payStatus == 0 ? 'No pagada' : 'Pagada'}
                     </Text>
                 </View>
+                <View style={styles.price}>
+                    <Text style={styles.priceText}>$ {value}</Text>
+                </View>
             </View>
-        </Pressable>
+        </TouchableRipple>
     )
 }
+
+const styles = StyleSheet.create({
+    wrap:{
+        margin:2,
+        borderWidth:0.5,
+        borderColor:'silver',
+        borderRadius:5
+    },
+    container : {
+        flexDirection:'row',
+        gap:5,
+        height:80
+    },
+    icon : {
+        width:'15%',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    info : {
+        width:'68%',
+        justifyContent:'center'
+    },
+    price : {
+        width:'15%',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    priceText:{
+        color:'#A537ED'
+    },
+    iconText : { 
+        color:'#FFF', 
+        fontSize: 10
+    }
+})
 
 export default CardRecetas

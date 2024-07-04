@@ -1,4 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setRenderProducts } from './renderProducts.slice';
+import { setTotalPage } from './totalPage';
+import { setIsLoading } from './isLoading.slice'
+import axios from 'axios';
 
 export const productsSlice = createSlice({
   name: 'products',
@@ -10,6 +14,22 @@ export const productsSlice = createSlice({
 
   }
 })
+
+export const setProductsThunk = (sheyla_url, token) => async(dispatch) =>{
+  dispatch(setIsLoading(true))
+  await axios.get(`${sheyla_url}/products/`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then( response => {
+    dispatch(setProducts(response.data.data))
+    dispatch(setRenderProducts(response.data.data.slice(0,5)))
+    dispatch(setTotalPage(Math.ceil(response.data.data.length / 5)))
+    dispatch(setIsLoading(false))
+  } )
+  .catch( error => console.log( error ) )
+}
 
 export const { setProducts } = productsSlice.actions;
 

@@ -40,7 +40,7 @@ const EditUser = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Appbar.Header style={styles.appbar}>
-                <Appbar.BackAction color="#FFF" onPress={() => navigation.navigate('Usuarios')} />
+                <Appbar.BackAction color="#FFF" onPress={() => navigation.navigate('Users')} />
                 <Appbar.Content color="#FFF" title="Editar Usuario" />
                 <Appbar.Action iconColor="#FFF" icon="content-save-outline" onPress={() => updateData()} />
             </Appbar.Header>
@@ -63,6 +63,7 @@ const EditUser = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'#FFF'
     },
     appbar: {
         backgroundColor: '#662D91',

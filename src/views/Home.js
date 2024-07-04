@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import useSWR from 'swr'
 import { Platform, BackHandler, AppState } from "react-native"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Navbar from '../components/Navbar'
 import HomeWeb from './HomeWeb'
 import HomeMobile from './HomeMobile'
-import { setProducts } from '../store/slices/products.slice'
-import { setRenderProducts } from '../store/slices/renderProducts.slice'
-import { setTotalPage } from '../store/slices/totalPage'
 import LoadingLogin from '../components/LoadingLogin'
 import ErrorData from '../components/ErrorData'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSheylaUrlThunk } from '../store/slices/sheyla/sheyla.slice'
+import { setProductsThunk } from '../store/slices/products.slice'
 
 import * as Notifications from 'expo-notifications';
 
@@ -22,8 +19,10 @@ const Home = ({ navigation, route })=>{
 
     const { lastMessage } = useSocket()
     const [notificationId, setNotificationId] = useState(null)
+    const [error, setError] = useState(false)
     const dispatch = useDispatch()
     const sheyla_url = useSelector( state => state.sheyla )
+    const isLoading = useSelector( state => state.isLoading )
 
     useEffect(()=>{
       const getUrl = async()=>{
@@ -31,7 +30,6 @@ const Home = ({ navigation, route })=>{
         const user = JSON.parse(userLogged)
         const zone = JSON.parse(user.zones)
         dispatch(setSheylaUrlThunk(zone[1]))
-        console.log(zone)
       }
       getUrl()
     },[])
@@ -84,9 +82,7 @@ const Home = ({ navigation, route })=>{
     const VerifyLogin = async() =>{
         const userLogged = await AsyncStorage.getItem('user')
         const token = await AsyncStorage.getItem('token')
-        const zone = JSON.parse(userLogged)
         if (userLogged && token) {
-            dispatch(setSheylaUrlThunk(zone[1]))
             return true
         }
         return false
@@ -111,18 +107,13 @@ const Home = ({ navigation, route })=>{
         return () => backHandler.remove();
     }, []);
 
-    //swr
-    const fetcher = async(url)=> axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${await AsyncStorage.getItem("token")}`
+    useEffect(() => {
+      const getProducts = async()=>{
+        const token = await AsyncStorage.getItem('token')
+        dispatch(setProductsThunk(sheyla_url, token))
       }
-    }).then( res => res.data )
-    .catch( error => error )
-    const { data, isLoading, error } = useSWR(`${sheyla_url}/products/`, fetcher)
-    
-    dispatch(setProducts(data?.data))
-    dispatch(setRenderProducts(data?.data?.slice(0,5)))
-    dispatch(setTotalPage(Math.ceil(data?.data?.length / 5)))
+      getProducts()
+    },[sheyla_url])
 
     return(
         isLoading === true ? <LoadingLogin></LoadingLogin>:

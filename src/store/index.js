@@ -17,6 +17,12 @@ import zonesSlice from './slices/register/zones.slice'
 import snackbarSlice from './slices/info/snackbar.slice'
 import editUserSlice from './slices/users/editUser.slice'
 import sheylaSlice from './slices/sheyla/sheyla.slice'
+import isLoadingSlice from './slices/isLoading.slice'
+import recetaUserSlice from './slices/recetas/recetaUser.slice'
+import recetaYearSlice from './slices/recetas/recetaYear.slice'
+import selectedRecetaSlice from './slices/recetas/selectedReceta.slice'
+import modalVisibleSlice from './slices/recetas/modalVisible.slice'
+import userRendimientoSlice from './slices/rendimiento/userRendimiento.slice'
 
 export default configureStore({
   reducer: {
@@ -40,6 +46,14 @@ export default configureStore({
         // info
         snackbar: snackbarSlice,
         // sheyla api
-        sheyla: sheylaSlice
+        sheyla: sheylaSlice,
+        isLoading: isLoadingSlice,
+        // recetas
+        recetaUser: recetaUserSlice,
+        recetaYear: recetaYearSlice,
+        selectedReceta: selectedRecetaSlice, 
+        modalVisible: modalVisibleSlice,
+        // rendimiento
+        userRendimiento: userRendimientoSlice 
 	}
 })

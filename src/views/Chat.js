@@ -41,7 +41,11 @@ const Chat = ({navigation, route})=>{
             const userLogged = await AsyncStorage.getItem('user')
             const userParsed = await JSON.parse(userLogged)
             setUser(userParsed)
-            await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/chats/?id=${userParsed.idusers}`)
+            await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/chats/?id=${userParsed.idusers}`, {
+                headers: {
+                  Authorization: `Bearer ${await AsyncStorage.getItem("token2")}`
+                }
+              })
             .then(async(response) =>{
                 const orderChatData = response.data.sort((a, b) => a.idchats - b.idchats)
                 setChats(orderChatData)

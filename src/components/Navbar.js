@@ -48,7 +48,7 @@ const Navbar = ({navigation, route})=>{
                 </> : false
             }
             {
-                Platform.OS != 'web' && searchBarIsVisible === false && route === 'Productos' ? 
+                Platform.OS != 'web' && searchBarIsVisible === false && route === 'Farmacias Modernas' ? 
                     <Appbar.Action iconColor='#fff' icon="magnify" 
                         onPress={() => { setSearchBarIsVisible(!searchBarIsVisible) }} 
                     />: false

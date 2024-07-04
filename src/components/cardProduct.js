@@ -4,7 +4,7 @@ import { Text, Icon } from "react-native-paper";
 import categories from "../utils/Categories";
 
 const CardProduct = ({id, product, stock, category}) => {
-
+ 
     const filterCategory = categories.find( element => category === element.id )
 
     let cat = "0"

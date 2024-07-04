@@ -60,17 +60,15 @@ const Users = ({ navigation, route })=>{
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:'#FFF',
-        marginTop: 10,
-        width:'80%',
+        backgroundColor:'transparent',
+        width:'100%',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent:'center',
         gap:10,
         flexDirection:'row',
         flexWrap:'wrap',
-        padding:30,
-        borderRadius: 5
+        padding:10,
     }
 })
 

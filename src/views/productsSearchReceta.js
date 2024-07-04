@@ -1,5 +1,4 @@
 import { Pressable, FlatList, RefreshControl, SafeAreaView, TextInput } from "react-native"
-import { Modal, Text } from "react-native-paper"
 import { useState, useCallback } from "react"
 import { useSelector } from "react-redux"
 import CardProduct from '../components/cardProduct'
@@ -27,7 +26,7 @@ const ProductsSearchReceta = ({ medicamentos, setMedicamentos, showModal, setMod
                 data={renderProducts}
                 renderItem={({item}) => 
                     <Pressable onPress={ ()=> {
-                        setModalData(item)
+                        setModalData(item) 
                         showModal()
                     } }>
                         <CardProduct id={item.CODIGO} product={item?.PRODUCTO} stock={(Number(item?.CANTIDAD) + Number(item?.b1) + Number(item?.b2))} category={ item?.CATEGORIA } />

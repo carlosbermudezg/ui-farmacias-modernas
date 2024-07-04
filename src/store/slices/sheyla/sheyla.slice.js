@@ -14,7 +14,6 @@ export const sheylaSlice = createSlice({
 export const setSheylaUrlThunk = (id) => (dispatch) =>{
   axios.get(`${process.env.EXPO_PUBLIC_API_URL}/zones/${id}`)
       .then( response => {
-            console.log(response.data[0].api)
             dispatch(setSheylaUrl( response.data[0].api ))
       })
       .catch( error => console.log( error ) )

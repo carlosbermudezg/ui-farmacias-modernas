@@ -27,81 +27,83 @@ const UserCard = ({user, changeUserStatus})=>{
 
     return(
         <Card style={styles.card}>
-            <View style={styles.data}>
+            <View style={styles.cardContainer}>
                 <View style={styles.image}>
-                    <Avatar.Image size={32} source={require('../../public/avatar-image.jpg')} />
+                    <Avatar.Image size={56} source={require('../../public/avatar-image.jpg')} />
                 </View>
-                <View>
-                    <Text><Text style={styles.title}>Nombre: </Text>{ user.name }</Text>
-                    <Text><Text style={styles.title}>Usuario: </Text>{ user.username }</Text>
-                    <Text><Text style={styles.title}>Telefono: </Text>{ user.telefono }</Text>
-                    <Text><Text style={styles.title}>Tipo: </Text>{ type }</Text>
-                    <Text><Text style={styles.title}>Estado: </Text>{ status }</Text>
+                <View style={styles.data}>
+                    <View>
+                        <Text style={styles.title}>{ user.name }</Text>
+                        <Text style={styles.title}>{ type }</Text>
+                        <Text><Text style={styles.title}>Estado: </Text>{ status }</Text>
+                    </View>
                 </View>
-            </View>
-            <Card.Actions style={styles.actions}>
-                <TouchableRipple
-                    style={styles.editButton} 
-                    rippleColor="rgba(0, 0, 0, .32)" 
-                    onPress={ ()=> {
-                        dispatch(setEditUser(user))
-                        navigation.navigate('EditUser')
-                    }}
-                >
-                    <Text style={styles.editText}>Editar</Text>
-                </TouchableRipple>
-                {
-                    user.active != 1 ? 
+                <Card.Actions style={styles.actions}>
+                    <IconButton
+                        style={styles.button}
+                        icon="account-edit"
+                        iconColor='#FFF'
+                        size={12}
+                        onPress={ ()=> {
+                            dispatch(setEditUser(user))
+                            navigation.navigate('EditUser')
+                        }}
+                    />
+                    {
+                        user.active != 1 ? 
                         <IconButton
-                            icon="account-off"
+                            style={styles.button}
+                            icon="close"
                             iconColor='red'
-                            size={20}
+                            size={12}
                             onPress={() => changeUserStatus(user.idusers, user.active)}
                         />:
                         <IconButton
-                            icon="account-check"
-                            iconColor='green'
-                            size={20}
+                            style={styles.button}
+                            icon="check"
+                            iconColor='#FFF'
+                            size={12}
                             onPress={() => changeUserStatus(user.idusers, user.active)}
                         />
-                }
-            </Card.Actions>
+                    }
+                </Card.Actions>
+            </View>
         </Card>
     )
 }
 
 const styles = StyleSheet.create({
     card:{
-        width:250,
-        maxWidth:250,
-        height:200,
-        alignItems:'center',
-        justifyContent:'center'
+        width:'100%',
+        height:90,
+        padding:10,
+    },
+    cardContainer: {
+        flexDirection:'row',
+        gap: 5,
+        height:'100%',
     },
     data:{
-        width:230,
-        height:140
+        flex:5,
     },
     title:{
         fontWeight:'bold'
     },
     actions:{
-        width:230,
-        height:40
-    },
-    editButton: {
-        backgroundColor:'#7A428D',
-        padding:7,
-        borderRadius:5,
-        borderWidth:1,
-        borderColor:'#D7BDE2'
+        flex:1,
     },
     image:{
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
     },
     editText:{
         color:'#FFF'
+    },
+    button:{
+        margin: 0,
+        backgroundColor:'#9A5FE1',
+        borderWidth: 1,
+        borderColor:'#9A5FE1'
     }
 })
 

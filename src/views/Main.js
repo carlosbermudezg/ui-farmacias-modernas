@@ -13,39 +13,21 @@ import Home from './Home'
 import Users from './users/Users'
 import LoginOut from './login/LogingOut'
 import Chat from './Chat'
-import RecetasSelect from './RecetasSelect'
+import RecetasSelect from './recetas/RecetasSelect'
 import ChatMobile from './ChatMobile'
-import AddReceta from './AddReceta'
-import Recetas from './Recetas'
-import RendimientoMedico from './RendimientoMedico'
+import AddReceta from './recetas/AddReceta'
+import Recetas from './recetas/Recetas'
+import RendimientoMedico from './rendimiento/RendimientoMedico'
 import EditUser from './users/EditUser'
+import Configuration from './configuration/Configuration'
+import RendimientoMes from './rendimiento/RendimientoMes'
 
 const HomeStack = ()=>{
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="Productos"
+                name="Farmacias Modernas"
                 component={ Home }
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="ChatMobile"
-                component={ ChatMobile }
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="AddReceta"
-                component={ AddReceta }
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="Recetas"
-                component={ Recetas }
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="EditUser"
-                component={ EditUser }
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>
@@ -73,7 +55,7 @@ const RecetasStack = ()=>{
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="Todas las Recetas"
+                name="RecetasMonth"
                 component={ RecetasSelect }
                 options={{ headerShown: false }}
             />
@@ -91,12 +73,29 @@ const RecetasStack = ()=>{
     )
 }
 
+const ConfigStack = ()=>{
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Config"
+                component={ Configuration }
+                options={{ headerShown: false }}
+            />
+        </Stack.Navigator>
+    )
+}
+
 const RendimientoStack = ()=>{
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="Recndimiento Médico"
+                name="Rendimiento"
                 component={ RendimientoMedico }
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="RendimientoMes"
+                component={ RendimientoMes }
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>
@@ -107,7 +106,7 @@ const UsersStack = ()=>{
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="Usuarios"
+                name="Users"
                 component={ Users }
                 options={{ headerShown: false }}
             />
@@ -229,6 +228,21 @@ const Main = ()=>{
                         } 
                     }  name="Usuarios" component={ UsersStack } /> : false
                 }
+                {/* {
+                    user.type === 10 ? <Drawer.Screen options={ 
+                        { 
+                            drawerIcon: ()=>{
+                                return(
+                                    <Icon
+                                        source="tools"
+                                        color={'#F57E25'}
+                                        size={20}
+                                    />
+                                )
+                            }
+                        } 
+                    }  name="Configuración" component={ ConfigStack } /> : false
+                } */}
                 <Drawer.Screen options={ {headerShown: false, drawerItemStyle:{ display: 'none' }} } name="Salir" component={ LoginOut } />
             </Drawer.Navigator>
         </SocketProvider>
