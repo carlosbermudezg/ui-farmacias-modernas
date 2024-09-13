@@ -24,11 +24,20 @@ const Login = ({ navigation })=>{
     const onDismissSnackBar = () => setSnackbarVisible(false)
 
     const VerifyLogin = async() =>{
-        const userLogged = await AsyncStorage.getItem('user')
+        // const userLogged = await AsyncStorage.getItem('user')
         const token = await AsyncStorage.getItem('token')
-        if (userLogged && token) {
-            navigation.navigate('Main')
-        }
+        await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/users/validateToken?token=${token}`)
+            .then(response => {
+                if(response.data.isValid == true){
+                    navigation.navigate('Main')
+                }else{
+                    console.log("token no valido")
+                }
+            })
+            .catch(err=> console.log(err))
+        // if (userLogged && token) {
+        //     navigation.navigate('Main')
+        // }
     }
 
     useEffect(() => {

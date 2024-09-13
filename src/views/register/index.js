@@ -269,6 +269,15 @@ const Register = ({navigation})=>{
                                 onChange={ (e) => setName(e) }
                             />
                             <TextInputComponent
+                                val={name}
+                                label="Nombres completos"
+                                labelColor='silver'
+                                color='#7A428D'
+                                borderColor='#F2F3F4'
+                                inputColor="#FFF"
+                                onChange={ (e) => setName(e) }
+                            />
+                            <TextInputComponent
                                 val={username}
                                 label="Correo Eléctronico"
                                 labelColor='silver'
